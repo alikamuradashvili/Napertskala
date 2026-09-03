@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1788031095900,
+      "tag": "0000_flashy_shinko_yamashiro",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1788039319191,
+      "tag": "0001_fuzzy_baron_zemo",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1788121877413,
+      "tag": "0002_daffy_jack_power",
+      "breakpoints": true
+    }
+  ]
+}
