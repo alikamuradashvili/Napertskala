@@ -21,7 +21,7 @@ export async function PATCH(request: Request) {
     await audit(auth.user.id,'save_content','site',null,{count:items.length}); return json({ok:true});
   }
   if (action === 'save_settings') {
-    const allowed = new Set(['phone','facebook','hours','location','logo_media_id','hero_media_id']); const values=body.values&&typeof body.values==='object'?body.values:{}; const now=Date.now();
+    const allowed = new Set(['phone','phone_welding','phone_electrical','phone_laser_cutting','phone_excavator','phone_diagnostics','service_welding_enabled','service_electrical_enabled','service_laser_cutting_enabled','service_excavator_enabled','service_diagnostics_enabled','facebook','hours','location','logo_media_id','hero_media_id']); const values=body.values&&typeof body.values==='object'?body.values:{}; const now=Date.now();
     for (const [key,value] of Object.entries(values)) { if(!allowed.has(key)) continue; await db.prepare(`INSERT INTO settings(key,value,updated_by,updated_at) VALUES(?,?,?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value,updated_by=excluded.updated_by,updated_at=excluded.updated_at`).bind(key,String(value??'').slice(0,1000),auth.user.id,now).run(); }
     await audit(auth.user.id,'save_settings','site'); return json({ok:true});
   }

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ServiceDetail from './service-detail';
 
-const serviceSlugs = ['welding', 'electrical', 'industrial', 'diagnostics'] as const;
+const serviceSlugs = ['welding', 'electrical', 'laser-cutting', 'excavator', 'diagnostics'] as const;
 type ServiceSlug = (typeof serviceSlugs)[number];
 
 const metadataBySlug: Record<ServiceSlug, { title: string; description: string }> = {
@@ -14,13 +14,17 @@ const metadataBySlug: Record<ServiceSlug, { title: string; description: string }
     title: 'სამფაზიანი და სამრეწველო ელექტრობა | Napertskala',
     description: 'სახლის ელექტრობა, სამფაზიანი სისტემები, დიდი ქარხნების ელექტრო მომსახურება და სამრეწველო ელექტროძრავები. მონტაჟი, დიაგნოსტიკა და შეკეთება.',
   },
-  industrial: {
-    title: 'აგრეგატები და დანადგარები | Napertskala',
-    description: 'გენერატორებისა და სამრეწველო დანადგარების დიაგნოსტიკა, მომსახურება და შეკეთება.',
-  },
   diagnostics: {
     title: 'ავტო დიაგნოსტიკა | Napertskala',
     description: 'ავტომობილის საბაზისო კომპიუტერული და ელექტრო დიაგნოსტიკა გორში.',
+  },
+  'laser-cutting': {
+    title: 'ლაზერული ჭრა, გრავირება და სუვენირები | Napertskala',
+    description: 'ხის სუვენირები, საჩუქრები, დეკორატიული პანოები და პერსონალური ლაზერული გრავირება გორში.',
+  },
+  excavator: {
+    title: 'ექსკავატორით მომსახურება | Napertskala',
+    description: 'მიწის სამუშაოები, თხრილები, მოსწორება, დატვირთვა და ობიექტის მომზადება გორში და შეთანხმებით სხვა ლოკაციებზე.',
   },
 };
 

@@ -19,8 +19,9 @@ export async function GET(request: Request) {
   if (!user || !canSignIn(user) || (user.google_sub && user.google_sub !== profile.sub)) return fail('This Google account is not authorized. Ask the site owner to add it first.');
   if (!user.google_sub) await db.prepare('UPDATE users SET google_sub=?,updated_at=? WHERE id=?').bind(profile.sub,Date.now(),user.id).run();
   const session = await createSession(user.id);
+  const secure = origin.startsWith('https://') ? '; Secure' : '';
   const headers = new Headers({ Location:`${origin}${canAccessAdmin(user)?'/admin':'/'}`, 'Cache-Control':'no-store', 'Referrer-Policy':'no-referrer' });
   headers.append('Set-Cookie',session.cookie);
-  headers.append('Set-Cookie','napertskala_oauth_state=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0');
+  headers.append('Set-Cookie',`napertskala_oauth_state=; Path=/; HttpOnly${secure}; SameSite=Lax; Max-Age=0`);
   return new Response(null,{status:302,headers});
 }
