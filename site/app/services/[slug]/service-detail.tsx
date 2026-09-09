@@ -3,6 +3,7 @@
 import {
   ArrowLeft,
   ArrowRight,
+  Calculator as CalculatorIcon,
   Car,
   CheckCircle2,
   Clock3,
@@ -182,6 +183,7 @@ const services: Record<ServiceSlug, Service> = {
 };
 
 const gallery = [
+  { src: '/services/welding/custom-brazier-welded-finished.jpeg', ka: 'შეკვეთით დამზადებული მაყალი ხის თაროებით', en: 'Custom welded brazier with wooden shelves', tall: false },
   { src: '/services/welding/canopy-frame-installation.jpg', ka: 'ლითონის ფარდულის კონსტრუქციის მონტაჟი', en: 'Steel canopy structure installation', tall: false },
   { src: '/services/welding/equipment-bucket-repair-2.jpg', ka: 'მძიმე ტექნიკის კოვშის აღდგენა', en: 'Heavy-equipment bucket restoration', tall: true },
   { src: '/services/welding/spiral-staircase-complete.jpg', ka: 'დასრულებული სპირალური კიბე', en: 'Completed spiral staircase', tall: true },
@@ -196,6 +198,8 @@ const gallery = [
   { src: '/services/welding/canopy-frame-painted.jpg', ka: 'მომზადებული და შეღებილი კონსტრუქცია', en: 'Prepared and painted structure', tall: false },
 ];
 const laserGallery = [
+  { src: '/services/laser-cutting/engraved-skewer-set-grill-wide.jpeg', ka: 'ლაზერით გრავირებული შამფურების კომპლექტი მაყალთან', en: 'Laser engraved skewer set with grill', tall: false },
+  { src: '/services/laser-cutting/engraved-skewer-set-grill-close.jpeg', ka: 'ქართული ორნამენტით გრავირებული შამფურები', en: 'Skewers engraved with Georgian ornament', tall: false },
   { src: '/services/laser-cutting/engraved-skewer-set-finished.jpeg', ka: 'გრავირებული შამფურის კომპლექტი', en: 'Engraved skewer set', tall: true },
   { src: '/services/laser-cutting/laser-engraving-process.jpeg', ka: 'ლაზერული გრავირების პროცესი', en: 'Laser engraving process', tall: false },
   { src: '/services/laser-cutting/motsamkvrelo-engraved-panel.jpeg', ka: 'ხეზე ამოტვიფრული დეკორატიული პანო', en: 'Engraved wooden decorative panel', tall: true },
@@ -204,8 +208,8 @@ const laserGallery = [
 ];
 
 const labels = {
-  ka: { back: 'მთავარზე დაბრუნება', details: 'რას ვაკეთებთ', process: 'როგორ ვმუშაობთ', calculator: 'კალკულატორი', calculatorLead: 'ამ სერვისის ინდივიდუალურ კალკულატორს შემდეგ ეტაპზე ავაწყობთ.', calculatorNote: 'აქ ჩაიდება ზომები, რაოდენობა, მასალა ან სხვა მონაცემები, რომლებიც ფასის დათვლას სჭირდება.', work: 'შესრულებული სამუშაოები', workLead: 'ფოტოებზე წარმოდგენილია ნაპერწკალას მიერ შესრულებული რეალური სამუშაოები.', other: 'სხვა სერვისები', call: 'დაგვირეკეთ', whatsapp: 'მოგვწერეთ WhatsApp-ზე', cta: 'განიხილეთ თქვენი სამუშაო ჩვენთან', ctaText: 'გამოგვიგზავნეთ ფოტო, ზომები ან მოკლე აღწერა და დაგიკავშირდებით პირობების შესათანხმებლად.', location: 'გორი • სხვა ლოკაციები შეთანხმებით', hours: 'ყოველდღე • 10:00–23:00' },
-  en: { back: 'Back to home', details: 'What we do', process: 'How we work', calculator: 'Calculator', calculatorLead: 'We will build the individual calculator for this service in the next step.', calculatorNote: 'This area will contain dimensions, quantity, material or other inputs needed for price calculation.', work: 'Completed work', workLead: 'These photos show real projects completed by Napertskala.', other: 'Other services', call: 'Call us', whatsapp: 'Message on WhatsApp', cta: 'Tell us about your job', ctaText: 'Send photos, dimensions or a short description and we will contact you to discuss the work.', location: 'Gori • Other locations by agreement', hours: 'Every day • 10:00–23:00' },
+  ka: { back: 'მთავარზე დაბრუნება', details: 'რას ვაკეთებთ', process: 'როგორ ვმუშაობთ', calculator: 'კალკულატორი', calculatorLead: 'ამ სერვისის ინდივიდუალურ კალკულატორს შემდეგ ეტაპზე ავაწყობთ.', calculatorNote: 'აქ ჩაიდება ზომები, მასალა ან სხვა მონაცემები, რომლებიც ფასის დათვლას სჭირდება.', work: 'შესრულებული სამუშაოები', workLead: 'ფოტოებზე წარმოდგენილია ნაპერწკალას მიერ შესრულებული რეალური სამუშაოები.', other: 'სხვა სერვისები', call: 'დაგვირეკეთ', whatsapp: 'მოგვწერეთ WhatsApp-ზე', cta: 'განიხილეთ თქვენი სამუშაო ჩვენთან', ctaText: 'გამოგვიგზავნეთ ფოტო, ზომები ან მოკლე აღწერა და დაგიკავშირდებით პირობების შესათანხმებლად.', location: 'გორი • სხვა ლოკაციები შეთანხმებით', hours: 'ყოველდღე • 10:00–23:00' },
+  en: { back: 'Back to home', details: 'What we do', process: 'How we work', calculator: 'Calculator', calculatorLead: 'We will build the individual calculator for this service in the next step.', calculatorNote: 'This area will contain dimensions, material or other inputs needed for price calculation.', work: 'Completed work', workLead: 'These photos show real projects completed by Napertskala.', other: 'Other services', call: 'Call us', whatsapp: 'Message on WhatsApp', cta: 'Tell us about your job', ctaText: 'Send photos, dimensions or a short description and we will contact you to discuss the work.', location: 'Gori • Other locations by agreement', hours: 'Every day • 10:00–23:00' },
 };
 const servicePhoneKeys: Record<ServiceSlug, string> = {
   welding: 'phone_welding',
@@ -225,6 +229,311 @@ const toWhatsappNumber = (phone: string) => {
   const digits = phone.replace(/\D/g, '');
   return digits.length === 9 && digits.startsWith('5') ? `995${digits}` : digits;
 };
+
+type CalculatorField = { key: string; ka: string; en: string; unitKa: string; unitEn: string; min: number; max: number; step: number; defaultValue: number };
+type CalculatorChoiceOption = { value: string; ka: string; en: string; categories?: string[] };
+type CalculatorChoice = { key: string; ka: string; en: string; dependsOn?: string; options: CalculatorChoiceOption[] };
+type CalculatorPreset = {
+  base: number;
+  fields: CalculatorField[];
+  choices?: CalculatorChoice[];
+  ka: { title: string; lead: string; note: string; formula: string };
+  en: { title: string; lead: string; note: string; formula: string };
+  calculate: (values: Record<string, number>, choices: Record<string, string>) => number;
+};
+
+const calculatorPresets: Record<ServiceSlug, CalculatorPreset> = {
+  welding: {
+    base: 30,
+    fields: [
+      { key: 'areaSize', ka: 'ზომა / მოცულობა', en: 'Size / volume', unitKa: 'ერთ.', unitEn: 'unit', min: 1, max: 50, step: 1, defaultValue: 1 },
+      { key: 'material', ka: 'მასალის საბაზრო ფასი', en: 'Market material cost', unitKa: '₾', unitEn: 'GEL', min: 0, max: 10000, step: 10, defaultValue: 150 },
+      { key: 'complexity', ka: 'ნაკეთობის სირთულე', en: 'Build complexity', unitKa: '/5', unitEn: '/5', min: 1, max: 5, step: 1, defaultValue: 3 },
+      { key: 'distance', ka: 'გასვლა გორიდან', en: 'Travel from Gori', unitKa: 'კმ', unitEn: 'km', min: 0, max: 300, step: 5, defaultValue: 0 },
+    ],
+    choices: [
+      { key: 'category', ka: 'სამუშაოს კატეგორია', en: 'Work category', options: [
+        { value: 'home_yard', ka: 'სახლი / ეზო (კვების ობიექტი, მცირე საწარმო)', en: 'Home / yard (food venue, small workshop)' },
+        { value: 'factory', ka: 'ქარხანა / საწარმო', en: 'Factory / industrial' },
+        { value: 'equipment', ka: 'ტექნიკა', en: 'Machinery' },
+      ] },
+      { key: 'item', ka: 'ქვეფილტრი / სამუშაო', en: 'Subcategory / work', dependsOn: 'category', options: [
+        { value: 'repair', ka: 'მცირე შეკეთება', en: 'Small repair', categories: ['home_yard', 'equipment'] },
+        { value: 'brazier', ka: 'მაყლის აწყობა', en: 'Brazier build', categories: ['home_yard'] },
+        { value: 'gazebo', ka: 'ფანჩატურის აწყობა', en: 'Gazebo build', categories: ['home_yard'] },
+        { value: 'railing', ka: 'მოაჯირი', en: 'Railing', categories: ['home_yard'] },
+        { value: 'gate', ka: 'ჭიშკარი / კარი', en: 'Gate / door', categories: ['home_yard', 'factory'] },
+        { value: 'stairs', ka: 'კიბე', en: 'Stairs', categories: ['home_yard', 'factory'] },
+        { value: 'canopy', ka: 'ფარდული / გადახურვა', en: 'Canopy / cover', categories: ['home_yard', 'factory'] },
+        { value: 'frame', ka: 'ლითონის ჩარჩო', en: 'Steel frame', categories: ['factory'] },
+        { value: 'pipes', ka: 'მილები / კომუნიკაცია', en: 'Pipes / utility line', categories: ['factory'] },
+        { value: 'factoryPart', ka: 'საწარმოს დეტალი', en: 'Factory part', categories: ['factory'] },
+        { value: 'equipmentPart', ka: 'მძიმე ტექნიკის დეტალი', en: 'Heavy equipment part', categories: ['equipment', 'factory'] },
+        { value: 'bucket', ka: 'კოვშის / სამაგრის დადუღება', en: 'Bucket / mount welding', categories: ['equipment'] },
+      ] },
+      { key: 'materialSource', ka: 'მასალა', en: 'Material', options: [
+        { value: 'ours', ka: 'ჩვენი მასალით', en: 'Our material' },
+        { value: 'client', ka: 'კლიენტის მოტანილი', en: 'Client brings material' },
+      ] },
+      { key: 'materialCondition', ka: 'მასალის მდგომარეობა', en: 'Material condition', options: [
+        { value: 'new', ka: 'ახალი', en: 'New' },
+        { value: 'used', ka: 'მეორადი', en: 'Used' },
+      ] },
+    ],
+    ka: {
+      title: 'შედუღების უხეში ფასის კალკულატორი',
+      lead: 'აირჩიეთ სამუშაოს კატეგორია, ქვეფილტრი, მასალა, ზომა, სირთულე და გასვლის მანძილი.',
+      note: 'ეს არის დაახლოებითი უხეში დათვლა. შედუღების საბოლოო ფასი მაინც ინდივიდუალურად ზუსტდება ფოტოს, ზომების, მასალის, დატვირთვის და ადგილზე პირობების მიხედვით. თუ ჩვენი მასალით ვაწყობთ, მუდმივი პარტნიორი კომპანია მასალას შეღავათიან ფასად გვაძლევს, ამიტომ ხშირად კლიენტისთვის უფრო იაფი გამოდის, ვიდრე ცალკე ყიდვა.',
+      formula: 'ფასი ითვლება მინიმუმიდან + სამუშაოს მოცულობა × ნივთის ტარიფი × კატეგორიის/სირთულის კოეფიციენტი + მასალა + გასვლა. მძიმე ტექნიკა იწყება 100₾-დან.',
+    },
+    en: {
+      title: 'Rough welding price calculator',
+      lead: 'Choose category, subcategory, material, size, complexity and travel distance.',
+      note: 'This is a rough initial estimate. Final welding price is still confirmed individually from photos, dimensions, material, load and site conditions. When we build with our material, a long-term partner company gives us discounted material prices, so it can often be cheaper for the customer than buying separately.',
+      formula: 'Price uses a minimum + work volume × item rate × category/complexity factor + material + travel. Heavy equipment starts from 100 GEL.',
+    },
+    calculate: (v, c) => {
+      const starts: Record<string, number> = { repair: 30, brazier: 60, gazebo: 180, railing: 80, gate: 100, stairs: 150, canopy: 180, frame: 120, pipes: 120, factoryPart: 200, equipmentPart: 100, bucket: 120 };
+      const volumeRates: Record<string, number> = { repair: 35, brazier: 55, gazebo: 120, railing: 65, gate: 85, stairs: 120, canopy: 130, frame: 80, pipes: 90, factoryPart: 130, equipmentPart: 140, bucket: 160 };
+      const categoryFactors: Record<string, number> = { home_yard: 1, factory: 1.35, equipment: 1.45 };
+      const complexityFactor = 0.85 + (v.complexity || 1) * 0.15;
+      const conditionFactor = c.materialCondition === 'used' ? 1.1 : 1;
+      const item = c.item || 'repair';
+      const labor = (v.areaSize || 1) * (volumeRates[item] || 60) * (categoryFactors[c.category] || 1) * complexityFactor * conditionFactor;
+      const material = c.materialSource === 'client' ? 0 : (v.material || 0) * (c.materialCondition === 'used' ? 0.68 : 0.88);
+      const materialHandling = c.materialSource === 'client' ? (c.materialCondition === 'used' ? 20 : 0) : (v.material ? 15 : 0);
+      return (starts[item] || 50) + labor + material + materialHandling + (v.distance || 0) * 1.5;
+    },
+  },
+  electrical: {
+    base: 25,
+    fields: [
+      { key: 'points', ka: 'წერტილების რაოდენობა', en: 'Electrical points', unitKa: 'ც', unitEn: 'pcs', min: 1, max: 120, step: 1, defaultValue: 4 },
+      { key: 'hours', ka: 'დიაგნოსტიკა/მონტაჟი', en: 'Diagnostics/install hours', unitKa: 'სთ', unitEn: 'h', min: 0, max: 30, step: 1, defaultValue: 1 },
+      { key: 'material', ka: 'მასალის ღირებულება', en: 'Material cost', unitKa: '₾', unitEn: 'GEL', min: 0, max: 5000, step: 10, defaultValue: 80 },
+    ],
+    ka: { title: 'ელექტრო მომსახურების კალკულატორი', lead: 'დათვალეთ წერტილები, სამუშაო დრო და მასალა.', note: 'ქარხნის, სამფაზიანი სისტემისა და რთული გაუმართაობის ფასი ინდივიდუალურად ზუსტდება.', formula: '25₾ დაწყება + 25₾/წერტილი + 45₾/სთ + მასალა' },
+    en: { title: 'Electrical service calculator', lead: 'Estimate by points, work time and material.', note: 'Factory, three-phase and complex fault work is confirmed individually.', formula: '25 GEL start + 25 GEL/point + 45 GEL/hour + material' },
+    calculate: (v) => 25 + v.points * 25 + v.hours * 45 + v.material,
+  },
+  'laser-cutting': {
+    base: 20,
+    fields: [
+      { key: 'width', ka: 'სიგანე', en: 'Width', unitKa: 'სმ', unitEn: 'cm', min: 5, max: 200, step: 1, defaultValue: 30 },
+      { key: 'height', ka: 'სიმაღლე', en: 'Height', unitKa: 'სმ', unitEn: 'cm', min: 5, max: 300, step: 1, defaultValue: 40 },
+      { key: 'quantity', ka: 'რაოდენობა', en: 'Quantity', unitKa: 'ც', unitEn: 'pcs', min: 1, max: 200, step: 1, defaultValue: 1 },
+      { key: 'design', ka: 'დიზაინის მომზადება', en: 'Design preparation', unitKa: '₾', unitEn: 'GEL', min: 0, max: 500, step: 10, defaultValue: 30 },
+    ],
+    ka: { title: 'ლაზერული ჭრის და გრავირების კალკულატორი', lead: 'შეიყვანეთ ზომა, რაოდენობა და დიზაინის მომზადების ღირებულება.', note: 'მასალის ტიპი, სისქე და გრავირების სირთულე საბოლოო ფასს ცვლის.', formula: '20₾ დაწყება + ფართობი × რაოდენობა × 0.08₾ + დიზაინი' },
+    en: { title: 'Laser cutting and engraving calculator', lead: 'Enter size, quantity and design preparation cost.', note: 'Material type, thickness and engraving complexity can change the final price.', formula: '20 GEL start + area × quantity × 0.08 GEL + design' },
+    calculate: (v) => 20 + v.width * v.height * v.quantity * 0.08 + v.design,
+  },
+  excavator: {
+    base: 80,
+    fields: [
+      { key: 'hours', ka: 'ტექნიკის მუშაობა', en: 'Machine hours', unitKa: 'სთ', unitEn: 'h', min: 1, max: 40, step: 1, defaultValue: 2 },
+      { key: 'distance', ka: 'გასვლა გორიდან', en: 'Travel from Gori', unitKa: 'კმ', unitEn: 'km', min: 0, max: 300, step: 5, defaultValue: 0 },
+      { key: 'loading', ka: 'დატვირთვა/გაწმენდა', en: 'Loading/cleanup', unitKa: 'სთ', unitEn: 'h', min: 0, max: 20, step: 1, defaultValue: 0 },
+    ],
+    ka: { title: 'ექსკავატორის მომსახურების კალკულატორი', lead: 'შეიყვანეთ სამუშაო საათები, გასვლა და დამატებითი დატვირთვა/გაწმენდა.', note: 'ფასი დამოკიდებულია მისასვლელზე, მიწის ტიპზე და სამუშაოს მოცულობაზე.', formula: '80₾ დაწყება + 120₾/სთ + 2₾/კმ + 70₾ დამატებითი საათი' },
+    en: { title: 'Excavator service calculator', lead: 'Enter machine hours, travel and extra loading/cleanup time.', note: 'Price depends on access, soil type and job volume.', formula: '80 GEL start + 120 GEL/hour + 2 GEL/km + 70 GEL extra hour' },
+    calculate: (v) => 80 + v.hours * 120 + v.distance * 2 + v.loading * 70,
+  },
+  diagnostics: {
+    base: 40,
+    fields: [
+      { key: 'scan', ka: 'კომპიუტერული დიაგნოსტიკა', en: 'Computer scan', unitKa: 'ც', unitEn: 'pcs', min: 1, max: 5, step: 1, defaultValue: 1 },
+      { key: 'electrical', ka: 'ელექტრო შემოწმება', en: 'Electrical check', unitKa: 'სთ', unitEn: 'h', min: 0, max: 8, step: 1, defaultValue: 1 },
+      { key: 'distance', ka: 'გასვლა', en: 'Travel', unitKa: 'კმ', unitEn: 'km', min: 0, max: 200, step: 5, defaultValue: 0 },
+    ],
+    ka: { title: 'ავტო დიაგნოსტიკის კალკულატორი', lead: 'დათვალეთ კომპიუტერული სკანი, ელექტრო შემოწმება და გასვლა.', note: 'ეს არ მოიცავს ყველა მექანიკურ შეკეთებას; საბოლოო ღირებულება პრობლემის მიხედვით ზუსტდება.', formula: '40₾ სკანი + 35₾/სთ ელექტრო შემოწმება + 1.5₾/კმ' },
+    en: { title: 'Car diagnostics calculator', lead: 'Estimate computer scan, electrical check and travel.', note: 'This does not include every mechanical repair; final price depends on the problem.', formula: '40 GEL scan + 35 GEL/hour electrical check + 1.5 GEL/km' },
+    calculate: (v) => v.scan * 40 + v.electrical * 35 + v.distance * 1.5,
+  },
+};
+
+type WeldingField = { key: string; ka: string; en: string; unitKa: string; unitEn: string; min: number; max: number; step: number; defaultValue: number };
+type WeldingItem = {
+  value: string;
+  ka: string;
+  en: string;
+  categories: string[];
+  range: [number, number];
+  fields: WeldingField[];
+  measure: (values: Record<string, number>) => number;
+};
+
+const weldingCategories = [
+  { value: 'home_yard', ka: 'სახლი / ეზო (კვების ობიექტი, მცირე საწარმო)', en: 'Home / yard (food venue, small workshop)' },
+  { value: 'factory', ka: 'ქარხანა / საწარმო', en: 'Factory / industrial' },
+  { value: 'equipment', ka: 'ტექნიკა', en: 'Machinery' },
+];
+
+const weldingItems: WeldingItem[] = [
+  { value: 'repair', ka: 'მცირე შეკეთება', en: 'Small repair', categories: ['home_yard', 'equipment'], range: [30, 180], fields: [{ key: 'length', ka: 'დეტალის სიგრძე', en: 'Part length', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 0.6 }, { key: 'width', ka: 'დეტალის სიგანე', en: 'Part width', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 0.3 }], measure: (v) => Math.max(1, (v.length || 0) * (v.width || 0) / 0.25) },
+  { value: 'brazier', ka: 'მაყლის აწყობა', en: 'Brazier build', categories: ['home_yard'], range: [350, 800], fields: [{ key: 'length', ka: 'სიგრძე', en: 'Length', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 0.9 }, { key: 'width', ka: 'სიგანე', en: 'Width', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 0.45 }, { key: 'height', ka: 'სიმაღლე', en: 'Height', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 0.7 }], measure: (v) => Math.max(1, (2 * ((v.length || 0) * (v.width || 0) + (v.length || 0) * (v.height || 0) + (v.width || 0) * (v.height || 0))) / 2.3) },
+  { value: 'gazebo', ka: 'ფანჩატურის აწყობა', en: 'Gazebo build', categories: ['home_yard'], range: [900, 4500], fields: [{ key: 'length', ka: 'სიგრძე', en: 'Length', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 3 }, { key: 'width', ka: 'სიგანე', en: 'Width', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 3 }], measure: (v) => Math.max(1, (v.length || 0) * (v.width || 0)) },
+  { value: 'railing', ka: 'მოაჯირი', en: 'Railing', categories: ['home_yard'], range: [120, 1600], fields: [{ key: 'length', ka: 'მოაჯირის სიგრძე', en: 'Railing length', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 4 }, { key: 'height', ka: 'სიმაღლე', en: 'Height', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 1 }], measure: (v) => Math.max(1, (v.length || 0) * (v.height || 1)) },
+  { value: 'gate', ka: 'ჭიშკარი / კარი', en: 'Gate / door', categories: ['home_yard', 'factory'], range: [350, 8000], fields: [{ key: 'width', ka: 'სიგანე', en: 'Width', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 1 }, { key: 'height', ka: 'სიმაღლე', en: 'Height', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 2 }], measure: (v) => Math.max(1, (v.width || 0) * (v.height || 0)) },
+  { value: 'stairs', ka: 'კიბე', en: 'Stairs', categories: ['home_yard', 'factory'], range: [700, 5000], fields: [{ key: 'steps', ka: 'საფეხურები', en: 'Steps', unitKa: 'ც', unitEn: 'pcs', min: 3, max: 40, step: 1, defaultValue: 10 }, { key: 'width', ka: 'სიგანე', en: 'Width', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 1 }], measure: (v) => Math.max(1, (v.steps || 0) * (v.width || 1) / 3) },
+  { value: 'canopy', ka: 'ფარდული / გადახურვა', en: 'Canopy / cover', categories: ['home_yard', 'factory'], range: [800, 1600], fields: [{ key: 'length', ka: 'სიგრძე', en: 'Length', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 6 }, { key: 'width', ka: 'სიგანე', en: 'Width', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 6 }, { key: 'height', ka: 'სიმაღლე', en: 'Height', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 2 }], measure: (v) => Math.max(1, (v.length || 0) * (v.width || 0) / 2.7 + ((v.length || 0) + (v.width || 0)) * (v.height || 0) / 5.5) },
+  { value: 'frame', ka: 'ლითონის ჩარჩო', en: 'Steel frame', categories: ['factory'], range: [250, 4000], fields: [{ key: 'length', ka: 'სიგრძე', en: 'Length', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 5 }, { key: 'width', ka: 'სიგანე', en: 'Width', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 2 }], measure: (v) => Math.max(1, (v.length || 0) * (v.width || 0)) },
+  { value: 'pipes', ka: 'მილები / კომუნიკაცია', en: 'Pipes / utility line', categories: ['factory'], range: [180, 2500], fields: [{ key: 'length', ka: 'მილების სიგრძე', en: 'Pipe length', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 8 }, { key: 'joints', ka: 'შეერთებები', en: 'Joints', unitKa: 'ც', unitEn: 'pcs', min: 1, max: 80, step: 1, defaultValue: 4 }], measure: (v) => Math.max(1, (v.length || 0) / 3 + (v.joints || 0) / 2) },
+  { value: 'factoryPart', ka: 'საწარმოს დეტალი', en: 'Factory part', categories: ['factory'], range: [250, 4500], fields: [{ key: 'length', ka: 'დეტალის სიგრძე', en: 'Part length', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 1.2 }, { key: 'width', ka: 'დეტალის სიგანე', en: 'Part width', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 0.8 }], measure: (v) => Math.max(1, (v.length || 0) * (v.width || 0) / 0.35) },
+  { value: 'equipmentPart', ka: 'მძიმე ტექნიკის დეტალი', en: 'Heavy equipment part', categories: ['equipment', 'factory'], range: [100, 3500], fields: [{ key: 'length', ka: 'დეტალის სიგრძე', en: 'Part length', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 1 }, { key: 'width', ka: 'დეტალის სიგანე', en: 'Part width', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 0.6 }], measure: (v) => Math.max(1, (v.length || 0) * (v.width || 0) / 0.3) },
+  { value: 'bucket', ka: 'კოვშის / სამაგრის დადუღება', en: 'Bucket / mount welding', categories: ['equipment'], range: [120, 4000], fields: [{ key: 'length', ka: 'დაზიანებული ადგილის სიგრძე', en: 'Damaged area length', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 0.8 }, { key: 'width', ka: 'დაზიანებული ადგილის სიგანე', en: 'Damaged area width', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 0.4 }], measure: (v) => Math.max(1, (v.length || 0) * (v.width || 0) / 0.22) },
+  { value: 'custom', ka: 'სხვა შეკვეთა', en: 'Custom order', categories: ['home_yard', 'factory', 'equipment'], range: [100, Infinity], fields: [{ key: 'length', ka: 'სიგრძე', en: 'Length', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 2 }, { key: 'width', ka: 'სიგანე', en: 'Width', unitKa: 'მ', unitEn: 'm', min: 0, max: 10, step: 0.1, defaultValue: 1 }], measure: (v) => Math.max(1, (v.length || 0) * (v.width || 1)) },
+];
+
+function WeldingPriceCalculator({ lang, whatsapp }: { lang: Lang; whatsapp: string }) {
+  const [category, setCategory] = useState('home_yard');
+  const items = weldingItems.filter((item) => item.categories.includes(category));
+  const [itemValue, setItemValue] = useState(items[0]?.value ?? 'repair');
+  const selectedItem = items.find((item) => item.value === itemValue) ?? items[0] ?? weldingItems[0];
+  const [materialSource, setMaterialSource] = useState<'ours' | 'client'>('ours');
+  const [materialCondition, setMaterialCondition] = useState<'new' | 'used'>('new');
+  const [values, setValues] = useState<Record<string, number>>({});
+
+  useEffect(() => { if (!items.some((item) => item.value === itemValue)) setItemValue(items[0]?.value ?? 'repair'); }, [items, itemValue]);
+  useEffect(() => {
+    setValues((current) => ({ ...Object.fromEntries(selectedItem.fields.map((field) => [field.key, field.defaultValue])), material: current.material ?? 250, complexity: current.complexity ?? 3, distance: current.distance ?? 0 }));
+  }, [selectedItem]);
+
+  const update = (key: string, value: number) => setValues((current) => ({ ...current, [key]: value }));
+  const factorByCategory: Record<string, number> = { home_yard: 1, factory: 1.32, equipment: 1.42 };
+  const complexityFactor = 0.85 + (values.complexity || 3) * 0.14;
+  const conditionFactor = materialCondition === 'used' ? 1.5 : 1;
+  const measure = selectedItem.measure(values);
+  const scale = Math.min(2.4, Math.max(0.75, measure / 3));
+  const material = materialSource === 'ours' ? (values.material || 0) * (materialCondition === 'used' ? 0.68 : 0.88) : 0;
+  const travel = (values.distance || 0) * 1.5;
+  const rawMin = (selectedItem.range[0] * scale * (factorByCategory[category] || 1) * complexityFactor + material + travel) * conditionFactor;
+  const rawMax = (selectedItem.range[1] * scale * (factorByCategory[category] || 1) * (complexityFactor + 0.22) + material + travel) * conditionFactor;
+  const gateWidth = values.width || 1;
+  const gateHeight = values.height || 2;
+  const gateArea = gateWidth * gateHeight;
+  const gateSlidingExtra = Math.max(0, gateWidth - 4);
+  const gateMin = (350 + Math.max(0, gateArea - 2) * 210 + gateSlidingExtra * 360) * (factorByCategory[category] || 1) * complexityFactor + material + travel;
+  const gateMax = (520 + Math.max(0, gateArea - 2) * 300 + gateSlidingExtra * 450) * (factorByCategory[category] || 1) * (complexityFactor + 0.22) + material + travel;
+  const cappedGateMin = Math.max(350, Math.min(8000, Math.round(gateMin * conditionFactor)));
+  const minPrice = selectedItem.value === 'brazier' ? Math.max(350, Math.min(800, Math.round(rawMin))) : selectedItem.value === 'gate' ? cappedGateMin : Math.max(selectedItem.range[0], Math.round(rawMin));
+  const maxPrice = selectedItem.value === 'brazier' ? Math.max(minPrice + 80, Math.min(800, Math.round(rawMax))) : selectedItem.value === 'gate' ? Math.max(minPrice, Math.min(8000, Math.round(gateMax * conditionFactor))) : Math.max(minPrice + 50, Math.round(rawMax));
+  const priceRangeText = Number.isFinite(maxPrice) ? `${minPrice} - ${maxPrice} ₾` : `${minPrice}₾ - ∞`;
+  const baseRangeText = Number.isFinite(selectedItem.range[1]) ? `${selectedItem.range[0]}-${selectedItem.range[1]}₾` : `${selectedItem.range[0]}₾ - ∞`;
+  const sharedFields: WeldingField[] = [
+    ...(materialSource === 'ours' ? [{ key: 'material', ka: 'მასალის საბაზრო ღირებულება', en: 'Market material cost', unitKa: '₾', unitEn: 'GEL', min: 0, max: 10000, step: 10, defaultValue: 250 }] : []),
+    { key: 'complexity', ka: 'სირთულე', en: 'Complexity', unitKa: '/5', unitEn: '/5', min: 1, max: 5, step: 1, defaultValue: 3 },
+    { key: 'distance', ka: 'გასვლა გორიდან', en: 'Travel from Gori', unitKa: 'კმ', unitEn: 'km', min: 0, max: 300, step: 5, defaultValue: 0 },
+  ];
+  const fields = [...selectedItem.fields, ...sharedFields];
+  const message = encodeURIComponent(`${lang === 'ka' ? 'შედუღების ფასის რეინჯი' : 'Welding price range'}\n${lang === 'ka' ? 'კატეგორია' : 'Category'}: ${weldingCategories.find((item) => item.value === category)?.[lang]}\n${lang === 'ka' ? 'სამუშაო' : 'Work'}: ${selectedItem[lang]}\n${fields.map((field) => `${field[lang]}: ${values[field.key] ?? field.defaultValue} ${lang === 'ka' ? field.unitKa : field.unitEn}`).join('\n')}\n${lang === 'ka' ? 'დაახლოებით' : 'Approx'}: ${priceRangeText}`);
+
+  return <section id="calculator" className="border-y border-white/10 bg-[#0e0f11] py-16 sm:py-20"><div className="mx-auto grid max-w-7xl gap-8 px-5 lg:grid-cols-[.68fr_1.32fr] lg:items-start lg:px-8"><div><p className="mb-4 text-xs font-extrabold uppercase tracking-[.24em] text-orange-500">{lang === 'ka' ? 'ფასის რეინჯი' : 'Price range'}</p><h2 className="text-3xl font-black sm:text-5xl">{lang === 'ka' ? 'შედუღების უხეში კალკულატორი' : 'Rough welding calculator'}</h2><p className="mt-5 text-lg leading-8 text-zinc-400">{lang === 'ka' ? 'აირჩიეთ კატეგორია და ქვეფილტრი. კალკულატორი მხოლოდ იმ ზომებს გთხოვთ, რაც ამ კონკრეტულ სამუშაოს სჭირდება.' : 'Choose a category and subcategory. The calculator asks only for dimensions needed for that work.'}</p><p className="mt-5 rounded-2xl border border-orange-500/25 bg-orange-500/10 p-4 text-sm font-bold leading-6 text-orange-200">{lang === 'ka' ? 'ფასი ჩანს რეინჯად, რადგან საბოლოო ღირებულება მასალაზე, ადგილზე პირობებზე და ნახაზის/ფოტოს დეტალებზეა დამოკიდებული.' : 'Price is shown as a range because final cost depends on material, site conditions and photo/drawing details.'}</p></div><div className="rounded-3xl border border-white/10 bg-[#090a0b] p-5 shadow-2xl shadow-black/20 sm:p-7"><div className="space-y-4"><ChoiceBlock title={lang === 'ka' ? 'კატეგორია' : 'Category'} options={weldingCategories} value={category} onChange={setCategory} lang={lang} /><ChoiceBlock title={lang === 'ka' ? 'ქვეფილტრი / სამუშაო' : 'Subcategory / work'} options={items.map((item) => ({ value: item.value, ka: item.ka, en: item.en, meta: Number.isFinite(item.range[1]) ? `${item.range[0]}-${item.range[1]}₾` : `${item.range[0]}₾ - ∞` }))} value={selectedItem.value} onChange={setItemValue} lang={lang} /><ChoiceBlock title={lang === 'ka' ? 'მასალა' : 'Material'} options={[{ value: 'ours', ka: 'ჩვენი მასალით', en: 'Our material' }, { value: 'client', ka: 'კლიენტის მოტანილი', en: 'Client brings material' }]} value={materialSource} onChange={(value) => setMaterialSource(value as 'ours' | 'client')} lang={lang} /><ChoiceBlock title={lang === 'ka' ? 'მასალის მდგომარეობა' : 'Material condition'} options={[{ value: 'new', ka: 'ახალი', en: 'New' }, { value: 'used', ka: 'მეორადი', en: 'Used' }]} value={materialCondition} onChange={(value) => setMaterialCondition(value as 'new' | 'used')} lang={lang} /></div><div className="mt-5 grid gap-5 md:grid-cols-2">{fields.map((field) => <NumberField key={`${selectedItem.value}-${field.key}`} field={field} value={values[field.key] ?? field.defaultValue} lang={lang} onChange={(value) => update(field.key, value)} />)}</div><div className="mt-6 rounded-2xl bg-orange-500 p-5 text-black sm:flex sm:items-end sm:justify-between sm:gap-6"><div><span className="flex items-center gap-2 text-sm font-black uppercase tracking-[.18em] text-black/60"><CalculatorIcon className="h-4 w-4" />{lang === 'ka' ? 'დაახლოებით' : 'Approximate'}</span><strong className="mt-2 block text-4xl font-black">{priceRangeText}</strong><span className="mt-1 block text-sm font-black text-black/60">{baseRangeText} {lang === 'ka' ? 'საწყისი რეინჯი ამ სამუშაოზე' : 'base range for this work'}</span></div><a href={`${whatsapp}?text=${message}`} target="_blank" rel="noreferrer" className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-black px-5 text-sm font-black text-white transition hover:bg-zinc-900 sm:mt-0 sm:w-auto"><MessageCircle className="h-5 w-5 text-[#25D366]" />{lang === 'ka' ? 'გაგზავნა WhatsApp-ზე' : 'Send on WhatsApp'}</a></div><p className="mt-4 text-sm leading-6 text-zinc-500">{lang === 'ka' ? 'ეს არის უხეში დათვლა. ჩვენი მასალით მუშაობისას პარტნიორი კომპანიის ფასდაკლება გათვალისწინებულია, ამიტომ ხშირად უფრო იაფი გამოდის. საბოლოო ფასი ზუსტდება ფოტოს, ზომების და სამუშაოს ნახვის შემდეგ.' : 'This is a rough estimate. When using our material, partner-company discounts are included, so it is often cheaper. Final price is confirmed after photos, dimensions and job review.'}</p></div></div></section>;
+}
+
+function ChoiceBlock({ title, options, value, onChange, lang }: { title: string; options: Array<{ value: string; ka: string; en: string; meta?: string }>; value: string; onChange: (value: string) => void; lang: Lang }) {
+  return <div className="rounded-2xl border border-white/10 bg-white/[.035] p-4"><span className="mb-3 block text-sm font-black">{title}</span><div className="flex flex-wrap gap-2">{options.map((option) => { const selected = value === option.value; return <button key={option.value} type="button" onClick={() => onChange(option.value)} className={`min-h-11 rounded-xl border px-3 py-2 text-left text-xs font-black leading-5 transition sm:text-sm ${selected ? 'border-orange-500 bg-orange-500 text-black shadow-lg shadow-orange-500/15' : 'border-white/10 bg-black/25 text-zinc-300 hover:border-orange-500/45 hover:text-white'}`}><span className="block">{lang === 'ka' ? option.ka : option.en}</span>{option.meta && <span className={`mt-1 block text-[10px] ${selected ? 'text-black/60' : 'text-orange-400'}`}>{option.meta}</span>}</button>; })}</div></div>;
+}
+
+function NumberField({ field, value, lang, onChange }: { field: WeldingField; value: number; lang: Lang; onChange: (value: number) => void }) {
+  return <label className="block rounded-2xl border border-white/10 bg-white/[.035] p-4"><span className="flex items-center justify-between gap-3 text-sm font-black"><span>{field[lang]}</span><span className="text-orange-400">{value} {lang === 'ka' ? field.unitKa : field.unitEn}</span></span><input type="range" min={field.min} max={field.max} step={field.step} value={value} onChange={(event) => onChange(Number(event.target.value))} className="mt-4 w-full accent-orange-500" /><input type="number" min={field.min} max={field.max} step={field.step} value={value} onChange={(event) => onChange(Number(event.target.value) || 0)} className="mt-3 h-11 w-full rounded-xl border border-white/10 bg-black/30 px-3 text-sm font-bold outline-none transition focus:border-orange-500" /></label>;
+}
+
+function PriceCalculator({ slug, lang, whatsapp }: { slug: ServiceSlug; lang: Lang; whatsapp: string }) {
+  if (slug === 'welding') return <WeldingPriceCalculator lang={lang} whatsapp={whatsapp} />;
+  const preset = calculatorPresets[slug];
+  const [values, setValues] = useState<Record<string, number>>(() => Object.fromEntries(preset.fields.map((field) => [field.key, field.defaultValue])));
+  const [choices, setChoices] = useState<Record<string, string>>(() => Object.fromEntries((preset.choices ?? []).map((choice) => [choice.key, choice.options[0]?.value ?? ''])));
+  const visibleOptions = (choice: CalculatorChoice, source: Record<string, string>) => {
+    const parentValue = choice.dependsOn ? source[choice.dependsOn] : '';
+    return choice.dependsOn ? choice.options.filter((option) => !option.categories || option.categories.includes(parentValue)) : choice.options;
+  };
+  useEffect(() => {
+    setValues(Object.fromEntries(preset.fields.map((field) => [field.key, field.defaultValue])));
+    setChoices(Object.fromEntries((preset.choices ?? []).map((choice) => [choice.key, choice.options[0]?.value ?? ''])));
+  }, [preset]);
+  const copy = preset[lang];
+  const activeChoices = (preset.choices ?? []).reduce<Record<string, string>>((current, choice) => {
+    const options = visibleOptions(choice, current);
+    current[choice.key] = options.some((option) => option.value === choices[choice.key]) ? choices[choice.key] : options[0]?.value ?? '';
+    return current;
+  }, {});
+  const total = Math.max(0, Math.round(preset.calculate(values, activeChoices)));
+  const update = (key: string, value: number) => setValues((current) => ({ ...current, [key]: value }));
+  const updateChoice = (key: string, value: string) => setChoices((current) => {
+    const next = { ...current, [key]: value };
+    (preset.choices ?? []).forEach((choice) => {
+      const options = visibleOptions(choice, next);
+      if (options.length && !options.some((option) => option.value === next[choice.key])) next[choice.key] = options[0].value;
+    });
+    return next;
+  });
+  const fieldLines = preset.fields.map((field) => `${lang === 'ka' ? field.ka : field.en}: ${values[field.key] ?? 0} ${lang === 'ka' ? field.unitKa : field.unitEn}`);
+  const choiceLines = (preset.choices ?? []).map((choice) => {
+    const options = visibleOptions(choice, activeChoices);
+    const option = options.find((item) => item.value === activeChoices[choice.key]) ?? options[0];
+    return `${lang === 'ka' ? choice.ka : choice.en}: ${option ? (lang === 'ka' ? option.ka : option.en) : ''}`;
+  });
+  const message = encodeURIComponent(`${copy.title}\n${[...choiceLines, ...fieldLines].join('\n')}\n${lang === 'ka' ? 'დაახლოებით' : 'Approx'}: ${total} GEL`);
+
+  return (
+    <section id="calculator" className="border-y border-white/10 bg-[#0e0f11] py-16 sm:py-20">
+      <div className="mx-auto grid max-w-7xl gap-8 px-5 lg:grid-cols-[.72fr_1.28fr] lg:items-start lg:px-8">
+        <div>
+          <p className="mb-4 text-xs font-extrabold uppercase tracking-[.24em] text-orange-500">{lang === 'ka' ? 'ფასის კალკულატორი' : 'Price calculator'}</p>
+          <h2 className="text-3xl font-black sm:text-5xl">{copy.title}</h2>
+          <p className="mt-5 text-lg leading-8 text-zinc-400">{copy.lead}</p>
+          <p className="mt-5 rounded-2xl border border-orange-500/25 bg-orange-500/10 p-4 text-sm font-bold leading-6 text-orange-200">{copy.formula}</p>
+        </div>
+        <div className="rounded-3xl border border-white/10 bg-[#090a0b] p-5 shadow-2xl shadow-black/20 sm:p-7">
+          {Boolean(preset.choices?.length) && <div className="mb-5 space-y-4">
+            {preset.choices?.map((choice) => (
+              <div key={choice.key} className="rounded-2xl border border-white/10 bg-white/[.035] p-4">
+                <span className="mb-3 block text-sm font-black">{lang === 'ka' ? choice.ka : choice.en}</span>
+                <div className="flex flex-wrap gap-2">
+                  {visibleOptions(choice, activeChoices).map((option) => {
+                    const selected = (activeChoices[choice.key] ?? option.value) === option.value;
+                    return (
+                      <button key={option.value} type="button" onClick={() => updateChoice(choice.key, option.value)} className={`min-h-11 rounded-xl border px-3 py-2 text-left text-xs font-black leading-5 transition sm:text-sm ${selected ? 'border-orange-500 bg-orange-500 text-black shadow-lg shadow-orange-500/15' : 'border-white/10 bg-black/25 text-zinc-300 hover:border-orange-500/45 hover:text-white'}`}>
+                        {lang === 'ka' ? option.ka : option.en}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>}
+          <div className="grid gap-5 md:grid-cols-2">
+            {preset.fields.map((field) => {
+              const value = values[field.key] ?? field.defaultValue;
+              return (
+                <label key={field.key} className="block rounded-2xl border border-white/10 bg-white/[.035] p-4">
+                  <span className="flex items-center justify-between gap-3 text-sm font-black">
+                    <span>{lang === 'ka' ? field.ka : field.en}</span>
+                    <span className="text-orange-400">{value} {lang === 'ka' ? field.unitKa : field.unitEn}</span>
+                  </span>
+                  <input type="range" min={field.min} max={field.max} step={field.step} value={value} onChange={(event) => update(field.key, Number(event.target.value))} className="mt-4 w-full accent-orange-500" />
+                  <input type="number" min={field.min} max={field.max} step={field.step} value={value} onChange={(event) => update(field.key, Number(event.target.value) || 0)} className="mt-3 h-11 w-full rounded-xl border border-white/10 bg-black/30 px-3 text-sm font-bold outline-none transition focus:border-orange-500" />
+                </label>
+              );
+            })}
+          </div>
+          <div className="mt-6 rounded-2xl bg-orange-500 p-5 text-black sm:flex sm:items-end sm:justify-between sm:gap-6">
+            <div>
+              <span className="flex items-center gap-2 text-sm font-black uppercase tracking-[.18em] text-black/60"><CalculatorIcon className="h-4 w-4" />{lang === 'ka' ? 'დაახლოებით' : 'Approximate'}</span>
+              <strong className="mt-2 block text-4xl font-black">{total} ₾</strong>
+            </div>
+            <a href={`${whatsapp}?text=${message}`} target="_blank" rel="noreferrer" className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-black px-5 text-sm font-black text-white transition hover:bg-zinc-900 sm:mt-0 sm:w-auto">
+              <MessageCircle className="h-5 w-5 text-[#25D366]" />
+              {lang === 'ka' ? 'გაგზავნა WhatsApp-ზე' : 'Send on WhatsApp'}
+            </a>
+          </div>
+          <p className="mt-4 text-sm leading-6 text-zinc-500">{copy.note}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function ServiceDetail({ slug }: { slug: ServiceSlug }) {
   const [lang, setLang] = useState<Lang>('ka');
@@ -283,7 +592,7 @@ export default function ServiceDetail({ slug }: { slug: ServiceSlug }) {
 
       <section className="py-20 sm:py-28"><div className="mx-auto max-w-7xl px-5 lg:px-8"><h2 className="text-4xl font-black sm:text-6xl">{ui.process}</h2><div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 md:grid-cols-4">{copy.process.map(([title, description], index) => { const StepIcon = [FileText, Ruler, Hammer, ShieldCheck][index]; return <article key={title} className="bg-[#090a0b] p-7"><div className="mb-8 flex items-center justify-between"><span className="grid h-11 w-11 place-items-center rounded-xl bg-orange-500 text-black"><StepIcon className="h-5 w-5"/></span><span className="text-sm font-black text-zinc-700">0{index + 1}</span></div><h3 className="text-xl font-black">{title}</h3><p className="mt-3 leading-7 text-zinc-400">{description}</p></article>})}</div></div></section>
 
-      <section id="calculator" className="border-y border-white/10 bg-[#0e0f11] py-16 sm:py-20"><div className="mx-auto grid max-w-7xl gap-8 px-5 lg:grid-cols-[.78fr_1.22fr] lg:items-center lg:px-8"><div><p className="mb-4 text-xs font-extrabold uppercase tracking-[.24em] text-orange-500">{ui.calculator}</p><h2 className="text-3xl font-black sm:text-5xl">{ui.calculator}</h2><p className="mt-5 text-lg leading-8 text-zinc-400">{ui.calculatorLead}</p></div><div className="rounded-3xl border border-dashed border-orange-500/35 bg-orange-500/[.06] p-6 sm:p-8"><div className="flex flex-col gap-5 sm:flex-row sm:items-center"><span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-orange-500 text-black"><Icon className="h-7 w-7"/></span><div><strong className="block text-xl font-black">{copy.title}</strong><p className="mt-2 leading-7 text-zinc-400">{ui.calculatorNote}</p></div></div></div></div></section>
+      <PriceCalculator slug={slug} lang={lang} whatsapp={whatsapp} />
 
       {(slug === 'welding' || slug === 'laser-cutting') && <section className="bg-[#111214] py-20 sm:py-28"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="mb-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"><div className="max-w-3xl"><p className="mb-4 text-xs font-extrabold uppercase tracking-[.24em] text-orange-500">Portfolio</p><h2 className="text-4xl font-black sm:text-6xl">{ui.work}</h2><p className="mt-5 text-lg leading-8 text-zinc-400">{ui.workLead}</p></div><div className="flex flex-wrap items-center gap-3"><span className="mr-1 flex items-center gap-3 text-sm font-bold text-zinc-400"><span className="grid h-10 min-w-10 place-items-center rounded-full bg-orange-500 text-black">{visibleGallery.length}</span>{lang==='ka'?'ფოტო იცვლება ავტომატურად':'Photos change automatically'}</span><button type="button" onClick={()=>scrollGallery(-1)} className="grid h-12 w-12 place-items-center rounded-full border border-white/15 bg-white/5 text-white transition hover:border-orange-500 hover:bg-orange-500 hover:text-black" aria-label={lang==='ka'?'წინა ფოტო':'Previous photo'}><ArrowLeft className="h-5 w-5"/></button><button type="button" onClick={()=>scrollGallery(1)} className="grid h-12 w-12 place-items-center rounded-full bg-orange-500 text-black transition hover:bg-orange-400" aria-label={lang==='ka'?'შემდეგი ფოტო':'Next photo'}><ArrowRight className="h-5 w-5"/></button></div></div><p className="mb-4 flex items-center gap-2 text-sm font-bold text-orange-300"><ArrowRight className="h-4 w-4"/>{lang==='ka'?'ფოტო ავტომატურად იცვლება ყოველ რამდენიმე წამში':'The photo advances automatically every few seconds'}</p><div ref={galleryRef} tabIndex={0} onKeyDown={(event)=>{if(event.key==='ArrowLeft')scrollGallery(-1);if(event.key==='ArrowRight')scrollGallery(1);}} className="gallery-scroll flex snap-x snap-mandatory gap-4 overflow-x-auto rounded-3xl pb-5 outline-none focus-visible:ring-2 focus-visible:ring-orange-500" aria-label={ui.work}>{visibleGallery.map((item, index) => <figure data-gallery-photo key={`${item.src}-${index}`} className={`group relative aspect-[4/3] w-[86vw] max-w-[760px] shrink-0 snap-start overflow-hidden rounded-3xl border bg-black transition ${index===galleryIndex?'border-orange-500/60':'border-white/10'}`}><Image src={item.src} alt={lang === 'ka' ? item.ka : item.en} fill sizes="(max-width: 640px) 86vw, 760px" className="object-cover transition duration-500 group-hover:scale-105" unoptimized={item.src.startsWith('/api/')} /><div className="absolute inset-0 bg-gradient-to-t from-black via-black/5 to-transparent"/><figcaption className="absolute inset-x-0 bottom-0 p-5 sm:p-7"><span className="mb-2 block text-[10px] font-black uppercase tracking-[.22em] text-orange-400">{String(index + 1).padStart(2,'0')} / {String(visibleGallery.length).padStart(2,'0')}</span><strong className="text-sm leading-6 sm:text-lg">{lang === 'ka' ? item.ka : item.en}</strong></figcaption></figure>)}</div><div className="mt-5 flex max-w-full gap-2 overflow-x-auto pb-2" aria-label={lang==='ka'?'ფოტოს არჩევა':'Choose photo'}>{visibleGallery.map((item,index)=><button type="button" key={`thumb-${item.src}-${index}`} onClick={()=>setGalleryIndex(index)} className={`relative h-16 w-24 shrink-0 overflow-hidden rounded-xl border-2 transition ${galleryIndex===index?'border-orange-500 opacity-100':'border-transparent opacity-50 hover:opacity-90'}`} aria-label={`${lang==='ka'?'ფოტო':'Photo'} ${index+1}`}><Image src={item.src} alt="" fill sizes="96px" className="object-cover" unoptimized={item.src.startsWith('/api/')} /></button>)}</div></div></section>}
 
