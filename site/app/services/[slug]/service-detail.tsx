@@ -206,11 +206,19 @@ const laserGallery = [
   { src: '/services/laser-cutting/engraved-skewer-set-outdoor.jpeg', ka: 'საჩუქრის კომპლექტი ქართული ორნამენტით', en: 'Gift set with Georgian ornament', tall: false },
   { src: '/services/laser-cutting/motsamkvrelo-design-black-white.jpeg', ka: 'ლაზერისთვის მომზადებული დიზაინი', en: 'Design prepared for laser engraving', tall: true },
 ];
+const serviceHeroImages: Record<ServiceSlug, { src: string; ka: string; en: string; real: boolean }> = {
+  welding: { src: '/services/welding/canopy-frame-installation.jpg', ka: 'ნაპერწკალას მიერ დამზადებული ლითონის კონსტრუქცია', en: 'Steel structure fabricated by Napertskala', real: true },
+  electrical: { src: '/services/electrical/electrical-panel-service.png', ka: 'ელექტრო მომსახურების სამუშაო', en: 'Electrical service work', real: false },
+  'laser-cutting': { src: '/services/laser-cutting/laser-engraving-process.jpeg', ka: 'ნაპერწკალას ლაზერული გრავირების სამუშაო', en: 'Laser engraving work by Napertskala', real: true },
+  excavator: { src: '/services/excavator/excavator-earthwork-service.png', ka: 'ექსკავატორით მიწის სამუშაოები', en: 'Excavator earthwork service', real: false },
+  diagnostics: { src: '/services/diagnostics/car-diagnostics-service.png', ka: 'ავტომობილის კომპიუტერული დიაგნოსტიკა', en: 'Car computer diagnostics service', real: false },
+};
 
 const labels = {
   ka: { back: 'მთავარზე დაბრუნება', details: 'რას ვაკეთებთ', process: 'როგორ ვმუშაობთ', calculator: 'კალკულატორი', calculatorLead: 'ამ სერვისის ინდივიდუალურ კალკულატორს შემდეგ ეტაპზე ავაწყობთ.', calculatorNote: 'აქ ჩაიდება ზომები, მასალა ან სხვა მონაცემები, რომლებიც ფასის დათვლას სჭირდება.', work: 'შესრულებული სამუშაოები', workLead: 'ფოტოებზე წარმოდგენილია ნაპერწკალას მიერ შესრულებული რეალური სამუშაოები.', other: 'სხვა სერვისები', call: 'დაგვირეკეთ', whatsapp: 'მოგვწერეთ WhatsApp-ზე', cta: 'განიხილეთ თქვენი სამუშაო ჩვენთან', ctaText: 'გამოგვიგზავნეთ ფოტო, ზომები ან მოკლე აღწერა და დაგიკავშირდებით პირობების შესათანხმებლად.', location: 'გორი • სხვა ლოკაციები შეთანხმებით', hours: 'ყოველდღე • 10:00–23:00' },
   en: { back: 'Back to home', details: 'What we do', process: 'How we work', calculator: 'Calculator', calculatorLead: 'We will build the individual calculator for this service in the next step.', calculatorNote: 'This area will contain dimensions, material or other inputs needed for price calculation.', work: 'Completed work', workLead: 'These photos show real projects completed by Napertskala.', other: 'Other services', call: 'Call us', whatsapp: 'Message on WhatsApp', cta: 'Tell us about your job', ctaText: 'Send photos, dimensions or a short description and we will contact you to discuss the work.', location: 'Gori • Other locations by agreement', hours: 'Every day • 10:00–23:00' },
 };
+const defaultMapUrl = 'https://maps.app.goo.gl/7jSzVvmDWJkMUuYNA';
 const servicePhoneKeys: Record<ServiceSlug, string> = {
   welding: 'phone_welding',
   electrical: 'phone_electrical',
@@ -312,16 +320,24 @@ const calculatorPresets: Record<ServiceSlug, CalculatorPreset> = {
       { key: 'hours', ka: 'დიაგნოსტიკა/მონტაჟი', en: 'Diagnostics/install hours', unitKa: 'სთ', unitEn: 'h', min: 0, max: 30, step: 1, defaultValue: 1 },
       { key: 'material', ka: 'მასალის ღირებულება', en: 'Material cost', unitKa: '₾', unitEn: 'GEL', min: 0, max: 5000, step: 10, defaultValue: 80 },
     ],
-    ka: { title: 'ელექტრო მომსახურების კალკულატორი', lead: 'დათვალეთ წერტილები, სამუშაო დრო და მასალა.', note: 'ქარხნის, სამფაზიანი სისტემისა და რთული გაუმართაობის ფასი ინდივიდუალურად ზუსტდება.', formula: '25₾ დაწყება + 25₾/წერტილი + 45₾/სთ + მასალა' },
-    en: { title: 'Electrical service calculator', lead: 'Estimate by points, work time and material.', note: 'Factory, three-phase and complex fault work is confirmed individually.', formula: '25 GEL start + 25 GEL/point + 45 GEL/hour + material' },
-    calculate: (v) => 25 + v.points * 25 + v.hours * 45 + v.material,
+    choices: [
+      { key: 'workType', ka: 'სამუშაოს ტიპი', en: 'Work type', options: [
+        { value: 'new_only', ka: 'მხოლოდ ახალი მონტაჟი', en: 'New installation only' },
+        { value: 'old_demolition_new', ka: 'ძველის დემონტაჟი + ახალი მონტაჟი', en: 'Remove old + install new' },
+      ] },
+    ],
+    ka: { title: 'ელექტრო მომსახურების კალკულატორი', lead: 'აირჩიეთ მხოლოდ ახალი მონტაჟია თუ ძველის დემონტაჟიც საჭიროა, შემდეგ დათვალეთ წერტილები, სამუშაო დრო და მასალა.', note: 'ქარხნის, სამფაზიანი სისტემისა და რთული გაუმართაობის ფასი ინდივიდუალურად ზუსტდება.', formula: 'მხოლოდ ახალი: 25₾ დაწყება + 25₾/წერტილი + 45₾/სთ + მასალა. დემონტაჟი + ახალი: 35₾ დაწყება + 45₾/წერტილი + 60₾/სთ + მასალა' },
+    en: { title: 'Electrical service calculator', lead: 'Choose whether this is new installation only or removing old wiring before new installation, then estimate points, work time and material.', note: 'Factory, three-phase and complex fault work is confirmed individually.', formula: 'New only: 25 GEL start + 25 GEL/point + 45 GEL/hour + material. Remove old + new: 35 GEL start + 45 GEL/point + 60 GEL/hour + material' },
+    calculate: (v, c) => c.workType === 'old_demolition_new'
+      ? 35 + v.points * 45 + v.hours * 60 + v.material
+      : 25 + v.points * 25 + v.hours * 45 + v.material,
   },
   'laser-cutting': {
     base: 20,
     fields: [
-      { key: 'width', ka: 'სიგანე', en: 'Width', unitKa: 'სმ', unitEn: 'cm', min: 5, max: 200, step: 1, defaultValue: 30 },
-      { key: 'height', ka: 'სიმაღლე', en: 'Height', unitKa: 'სმ', unitEn: 'cm', min: 5, max: 300, step: 1, defaultValue: 40 },
-      { key: 'quantity', ka: 'რაოდენობა', en: 'Quantity', unitKa: 'ც', unitEn: 'pcs', min: 1, max: 200, step: 1, defaultValue: 1 },
+      { key: 'width', ka: 'სიგანე', en: 'Width', unitKa: 'სმ', unitEn: 'cm', min: 5, max: 100, step: 1, defaultValue: 30 },
+      { key: 'height', ka: 'სიმაღლე', en: 'Height', unitKa: 'სმ', unitEn: 'cm', min: 5, max: 100, step: 1, defaultValue: 40 },
+      { key: 'quantity', ka: 'რაოდენობა', en: 'Quantity', unitKa: 'ც', unitEn: 'pcs', min: 1, max: 10000, step: 1, defaultValue: 1 },
       { key: 'design', ka: 'დიზაინის მომზადება', en: 'Design preparation', unitKa: '₾', unitEn: 'GEL', min: 0, max: 500, step: 10, defaultValue: 30 },
     ],
     ka: { title: 'ლაზერული ჭრის და გრავირების კალკულატორი', lead: 'შეიყვანეთ ზომა, რაოდენობა და დიზაინის მომზადების ღირებულება.', note: 'მასალის ტიპი, სისქე და გრავირების სირთულე საბოლოო ფასს ცვლის.', formula: '20₾ დაწყება + ფართობი × რაოდენობა × 0.08₾ + დიზაინი' },
@@ -543,11 +559,13 @@ export default function ServiceDetail({ slug }: { slug: ServiceSlug }) {
   useEffect(() => { fetch('/api/site').then((r) => r.ok ? r.json() : null).then((value: unknown) => value && setCms(value as { settings: Record<string, string>; gallery: Array<{id:string;filename:string;alt_ka:string;alt_en:string;url:string}> })).catch(() => {}); }, []);
   const phone = cms?.settings?.[servicePhoneKeys[slug]] || defaultServicePhones[slug] || cms?.settings?.phone || '+995574814088';
   const whatsapp = `https://wa.me/${toWhatsappNumber(phone)}`;
+  const mapUrl = cms?.settings?.map_url || defaultMapUrl;
   const logoSrc = cms?.settings?.logo_media_id ? `/api/media/${cms.settings.logo_media_id}` : '/logo.jpg';
   const service = services[slug];
   const copy = service[lang];
   const ui = labels[lang];
   const Icon = service.icon;
+  const heroImage = serviceHeroImages[slug];
   const serviceEnabled = (value: ServiceSlug) => cms?.settings?.[`service_${value.replace('-', '_')}_enabled`] !== 'false';
   const serviceGallery = slug === 'laser-cutting' ? laserGallery : gallery;
   const visibleGallery = [...serviceGallery, ...(slug === 'welding' ? (cms?.gallery ?? []).map((item) => ({ src:item.url, ka:item.alt_ka || item.filename, en:item.alt_en || item.filename, tall:false })) : [])];
@@ -583,12 +601,12 @@ export default function ServiceDetail({ slug }: { slug: ServiceSlug }) {
               <p className="mt-7 max-w-2xl text-lg leading-8 text-zinc-300 sm:text-xl">{copy.lead}</p>
               <div className="mt-9 flex flex-col gap-3 sm:flex-row"><a href={whatsapp} target="_blank" rel="noreferrer" className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-[#25D366] px-7 font-extrabold text-black transition hover:-translate-y-0.5"><MessageCircle className="h-5 w-5" />{ui.whatsapp}</a><a href={`tel:${phone}`} className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 font-bold transition hover:border-orange-400/60"><Phone className="h-5 w-5 text-orange-400" />{phone}</a></div>
             </div>
-            {slug === 'welding' || slug === 'laser-cutting' ? <div className="relative"><div className="absolute -inset-8 rounded-[3rem] bg-orange-500/10 blur-3xl"/><div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-orange-400/25"><Image src={slug === 'welding' ? '/services/welding/canopy-frame-installation.jpg' : '/services/laser-cutting/laser-engraving-process.jpeg'} alt={slug === 'welding' ? (lang === 'ka' ? 'ნაპერწკალას მიერ დამზადებული ლითონის კონსტრუქცია' : 'Steel structure fabricated by Napertskala') : (lang === 'ka' ? 'ნაპერწკალას ლაზერული გრავირების სამუშაო' : 'Laser engraving work by Napertskala')} fill priority sizes="(max-width: 1024px) 100vw, 48vw" className="object-cover"/><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent px-6 pt-20 pb-6"><p className="text-sm font-bold text-orange-300">{lang === 'ka' ? 'რეალური შესრულებული სამუშაო' : 'Real completed project'}</p></div></div></div> : <div className="relative grid aspect-[4/3] place-items-center overflow-hidden rounded-[2rem] border border-orange-400/20 bg-[radial-gradient(circle,rgba(249,115,22,.18),transparent_55%)]"><div className="absolute inset-0 spark-grid opacity-20"/><Icon className="relative h-36 w-36 text-orange-500" strokeWidth={1}/></div>}
+            <div className="relative"><div className="absolute -inset-8 rounded-[3rem] bg-orange-500/10 blur-3xl"/><div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-orange-400/25"><Image src={heroImage.src} alt={lang === 'ka' ? heroImage.ka : heroImage.en} fill priority sizes="(max-width: 1024px) 100vw, 48vw" className="object-cover"/><div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent px-6 pt-20 pb-6"><p className="text-sm font-bold text-orange-300">{heroImage.real ? (lang === 'ka' ? 'რეალური შესრულებული სამუშაო' : 'Real completed project') : (lang === 'ka' ? 'სერვისის ვიზუალური მაგალითი' : 'Service visual example')}</p></div></div></div>
           </div>
         </div>
       </section>
 
-      <section className="border-y border-white/10 bg-[#0e0f11] py-16 sm:py-20"><div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.72fr_1.28fr] lg:px-8"><div><p className="text-xs font-extrabold uppercase tracking-[.24em] text-orange-500">Napertskala</p><p className="mt-5 text-lg leading-8 text-zinc-400">{copy.summary}</p><div className="mt-7 space-y-3 text-sm font-bold text-zinc-300"><p className="flex items-center gap-3"><MapPin className="h-5 w-5 text-orange-500" />{ui.location}</p><p className="flex items-center gap-3"><Clock3 className="h-5 w-5 text-orange-500" />{ui.hours}</p></div></div><div><h2 className="mb-8 text-3xl font-black sm:text-5xl">{ui.details}</h2><div className="grid gap-3 sm:grid-cols-2">{copy.features.map(([title, description]) => <article key={title} className="rounded-2xl border border-white/10 bg-white/[.035] p-6"><CheckCircle2 className="mb-5 h-6 w-6 text-orange-500"/><h3 className="text-lg font-black">{title}</h3><p className="mt-3 leading-7 text-zinc-400">{description}</p></article>)}</div></div></div></section>
+      <section className="border-y border-white/10 bg-[#0e0f11] py-16 sm:py-20"><div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[.72fr_1.28fr] lg:px-8"><div><p className="text-xs font-extrabold uppercase tracking-[.24em] text-orange-500">Napertskala</p><p className="mt-5 text-lg leading-8 text-zinc-400">{copy.summary}</p><div className="mt-7 space-y-3 text-sm font-bold text-zinc-300"><a href={mapUrl} target="_blank" rel="noreferrer" className="flex items-center gap-3 transition hover:text-orange-400"><MapPin className="h-5 w-5 text-orange-500" />{ui.location}<span className="text-xs text-orange-400">Google Maps</span></a><p className="flex items-center gap-3"><Clock3 className="h-5 w-5 text-orange-500" />{ui.hours}</p></div></div><div><h2 className="mb-8 text-3xl font-black sm:text-5xl">{ui.details}</h2><div className="grid gap-3 sm:grid-cols-2">{copy.features.map(([title, description]) => <article key={title} className="rounded-2xl border border-white/10 bg-white/[.035] p-6"><CheckCircle2 className="mb-5 h-6 w-6 text-orange-500"/><h3 className="text-lg font-black">{title}</h3><p className="mt-3 leading-7 text-zinc-400">{description}</p></article>)}</div></div></div></section>
 
       <section className="py-20 sm:py-28"><div className="mx-auto max-w-7xl px-5 lg:px-8"><h2 className="text-4xl font-black sm:text-6xl">{ui.process}</h2><div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 md:grid-cols-4">{copy.process.map(([title, description], index) => { const StepIcon = [FileText, Ruler, Hammer, ShieldCheck][index]; return <article key={title} className="bg-[#090a0b] p-7"><div className="mb-8 flex items-center justify-between"><span className="grid h-11 w-11 place-items-center rounded-xl bg-orange-500 text-black"><StepIcon className="h-5 w-5"/></span><span className="text-sm font-black text-zinc-700">0{index + 1}</span></div><h3 className="text-xl font-black">{title}</h3><p className="mt-3 leading-7 text-zinc-400">{description}</p></article>})}</div></div></section>
 
@@ -600,7 +618,7 @@ export default function ServiceDetail({ slug }: { slug: ServiceSlug }) {
 
       <section className="px-5 pb-24 lg:px-8"><div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-orange-500 p-8 text-black sm:p-14"><div className="absolute -right-20 -top-20 h-64 w-64 rounded-full border-[48px] border-black/5"/><div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end"><div><h2 className="max-w-3xl text-4xl font-black leading-tight sm:text-6xl">{ui.cta}</h2><p className="mt-5 max-w-2xl text-lg font-medium text-black/70">{ui.ctaText}</p></div><div className="flex flex-col gap-3"><a href={whatsapp} target="_blank" rel="noreferrer" className="inline-flex h-14 min-w-64 items-center justify-center gap-2 rounded-full bg-black px-7 font-bold text-white hover:bg-zinc-900"><MessageCircle className="h-5 w-5 text-[#25D366]"/>{ui.whatsapp}</a><a href={`tel:${phone}`} className="inline-flex h-14 items-center justify-center gap-2 rounded-full border-2 border-black/20 px-7 font-extrabold"><Phone className="h-5 w-5"/>{phone}</a></div></div></div></section>
 
-      <footer className="border-t border-white/10 py-10"><div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 sm:flex-row sm:items-center sm:justify-between lg:px-8"><a href="/" className="flex items-center gap-3"><Image src={logoSrc} alt="Napertskala" width={42} height={42} className="h-11 w-11 rounded-full object-cover" unoptimized={logoSrc.startsWith('/api/')}/><div><strong className="block">ნაპერწკალა / Napertskala</strong><span className="text-xs text-zinc-500">Welding & technical services</span></div></a><p className="text-sm text-zinc-500">{ui.location} · {ui.hours}</p></div></footer>
+      <footer className="border-t border-white/10 py-10"><div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 sm:flex-row sm:items-center sm:justify-between lg:px-8"><a href="/" className="flex items-center gap-3"><Image src={logoSrc} alt="Napertskala" width={42} height={42} className="h-11 w-11 rounded-full object-cover" unoptimized={logoSrc.startsWith('/api/')}/><div><strong className="block">ნაპერწკალა / Napertskala</strong><span className="text-xs text-zinc-500">Welding & technical services</span></div></a><p className="text-sm text-zinc-500"><a href={mapUrl} target="_blank" rel="noreferrer" className="transition hover:text-orange-400">{ui.location}</a> · {ui.hours}</p></div></footer>
       <a href={whatsapp} target="_blank" rel="noreferrer" aria-label={ui.whatsapp} className="fixed right-5 bottom-5 z-40 flex h-14 items-center gap-3 rounded-full bg-[#25D366] px-4 text-sm font-black text-black shadow-[0_12px_40px_rgba(37,211,102,.3)] transition hover:scale-105 sm:pr-6"><MessageCircle className="h-6 w-6"/><span className="hidden sm:inline">WhatsApp</span></a>
     </main>
   );
