@@ -16,6 +16,7 @@ import {
   Phone,
   Ruler,
   ShieldCheck,
+  Truck,
   Wrench,
   Zap,
 } from 'lucide-react';
@@ -24,7 +25,7 @@ import { useEffect, useRef, useState } from 'react';
 import AccountLink from '@/components/account-link';
 
 type Lang = 'ka' | 'en';
-const serviceSlugs = ['welding', 'electrical', 'laser-cutting', 'excavator', 'diagnostics'] as const;
+const serviceSlugs = ['welding', 'electrical', 'laser-cutting', 'excavator', 'towing', 'diagnostics'] as const;
 type ServiceSlug = (typeof serviceSlugs)[number];
 
 type Copy = {
@@ -128,6 +129,24 @@ const services: Record<ServiceSlug, Service> = {
       process: [['Photo and address', 'Send the location photo, address and a short job description.'], ['Scope estimate', 'We confirm access, soil type, volume and the equipment needed.'], ['Schedule agreement', 'We agree on timing, conditions and estimated duration.'], ['Completion', 'We complete the earthwork and check the agreed result.']],
     },
   },
+  towing: {
+    icon: Truck,
+    ka: {
+      label: 'ავტომობილის გადაყვანა',
+      title: 'ევაკუატორით მომსახურება',
+      lead: 'Mercedes-Benz Sprinter ევაკუატორით დაზიანებული, გაუმართავი ან არამოძრავი ავტომობილის უსაფრთხოდ გადაყვანა გორში და სხვა ლოკაციებზე.',
+      summary: 'ფასი ითვლება გასვლის, მანძილის, ავტომობილის მდგომარეობისა და ჩატვირთვის სირთულის მიხედვით.',
+      features: [['ავტომობილის გადაყვანა', 'მსუბუქი ავტომობილის უსაფრთხო ტრანსპორტირება.'], ['გაუმართაობისას დახმარება', 'გზაზე გაფუჭებული ავტომობილის გადაყვანა სასურველ ადგილამდე.'], ['გორი და სხვა ლოკაციები', 'გასვლა წინასწარი შეთანხმებით.'], ['ფასის წინასწარი შეფასება', 'მოგვწერეთ ადგილმდე მანძილი და ავტომობილის მდგომარეობა.']],
+      process: [['დაგვიკავშირდით', 'გვითხარით ავტომობილის მარკა, მდგომარეობა და ზუსტი ლოკაცია.'], ['ფასის შეფასება', 'ვაზუსტებთ მანძილსა და ჩატვირთვის პირობებს.'], ['გასვლა', 'ევაკუატორი მოდის შეთანხმებულ დროს.'], ['გადაყვანა', 'ავტომობილი უსაფრთხოდ გადაგვყავს მითითებულ ადგილზე.']],
+    },
+    en: {
+      label: 'Vehicle transport', title: 'Towing service',
+      lead: 'Safe transport for damaged, disabled or non-running vehicles with our Mercedes-Benz Sprinter evacuator in Gori and other locations.',
+      summary: 'Pricing depends on dispatch, distance, vehicle condition and loading difficulty.',
+      features: [['Vehicle transport', 'Safe flatbed transport for passenger vehicles.'], ['Breakdown recovery', 'Transport from the roadside to your selected destination.'], ['Gori and other locations', 'Travel outside Gori is available by prior agreement.'], ['Price estimate', 'Send the route and vehicle condition for an initial estimate.']],
+      process: [['Contact us', 'Send the vehicle make, condition and exact location.'], ['Estimate', 'We confirm distance and loading conditions.'], ['Dispatch', 'The tow truck arrives at the agreed time.'], ['Transport', 'We safely deliver the vehicle to the requested location.']],
+    },
+  },
   diagnostics: {
     icon: Car,
     ka: {
@@ -211,12 +230,13 @@ const serviceHeroImages: Record<ServiceSlug, { src: string; ka: string; en: stri
   electrical: { src: '/services/electrical/electrical-panel-service.png', ka: 'ელექტრო მომსახურების სამუშაო', en: 'Electrical service work', real: false },
   'laser-cutting': { src: '/services/laser-cutting/laser-engraving-process.jpeg', ka: 'ნაპერწკალას ლაზერული გრავირების სამუშაო', en: 'Laser engraving work by Napertskala', real: true },
   excavator: { src: '/services/excavator/excavator-earthwork-service.png', ka: 'ექსკავატორით მიწის სამუშაოები', en: 'Excavator earthwork service', real: false },
+  towing: { src: '/services/towing/mercedes-sprinter-tow-truck-service.png', ka: 'Mercedes-Benz Sprinter ევაკუატორი', en: 'Mercedes-Benz Sprinter towing service', real: false },
   diagnostics: { src: '/services/diagnostics/car-diagnostics-service.png', ka: 'ავტომობილის კომპიუტერული დიაგნოსტიკა', en: 'Car computer diagnostics service', real: false },
 };
 
 const labels = {
-  ka: { back: 'მთავარზე დაბრუნება', details: 'რას ვაკეთებთ', process: 'როგორ ვმუშაობთ', calculator: 'კალკულატორი', calculatorLead: 'ამ სერვისის ინდივიდუალურ კალკულატორს შემდეგ ეტაპზე ავაწყობთ.', calculatorNote: 'აქ ჩაიდება ზომები, მასალა ან სხვა მონაცემები, რომლებიც ფასის დათვლას სჭირდება.', work: 'შესრულებული სამუშაოები', workLead: 'ფოტოებზე წარმოდგენილია ნაპერწკალას მიერ შესრულებული რეალური სამუშაოები.', other: 'სხვა სერვისები', call: 'დაგვირეკეთ', whatsapp: 'მოგვწერეთ WhatsApp-ზე', cta: 'განიხილეთ თქვენი სამუშაო ჩვენთან', ctaText: 'გამოგვიგზავნეთ ფოტო, ზომები ან მოკლე აღწერა და დაგიკავშირდებით პირობების შესათანხმებლად.', location: 'გორი • სხვა ლოკაციები შეთანხმებით', hours: 'ყოველდღე • 10:00–23:00' },
-  en: { back: 'Back to home', details: 'What we do', process: 'How we work', calculator: 'Calculator', calculatorLead: 'We will build the individual calculator for this service in the next step.', calculatorNote: 'This area will contain dimensions, material or other inputs needed for price calculation.', work: 'Completed work', workLead: 'These photos show real projects completed by Napertskala.', other: 'Other services', call: 'Call us', whatsapp: 'Message on WhatsApp', cta: 'Tell us about your job', ctaText: 'Send photos, dimensions or a short description and we will contact you to discuss the work.', location: 'Gori • Other locations by agreement', hours: 'Every day • 10:00–23:00' },
+  ka: { back: 'მთავარზე დაბრუნება', details: 'რას ვაკეთებთ', process: 'როგორ ვმუშაობთ', calculator: 'კალკულატორი', calculatorLead: 'ამ სერვისის ინდივიდუალურ კალკულატორს შემდეგ ეტაპზე ავაწყობთ.', calculatorNote: 'აქ ჩაიდება ზომები, მასალა ან სხვა მონაცემები, რომლებიც ფასის დათვლას სჭირდება.', work: 'შესრულებული სამუშაოები', workLead: 'ფოტოებზე წარმოდგენილია ნაპერწკალას მიერ შესრულებული რეალური სამუშაოები.', other: 'სერვისები', call: 'დაგვირეკეთ', whatsapp: 'მოგვწერეთ WhatsApp-ზე', cta: 'განიხილეთ თქვენი სამუშაო ჩვენთან', ctaText: 'გამოგვიგზავნეთ ფოტო, ზომები ან მოკლე აღწერა და დაგიკავშირდებით პირობების შესათანხმებლად.', location: 'გორი • სხვა ლოკაციები შეთანხმებით', hours: 'ყოველდღე • 10:00–23:00' },
+  en: { back: 'Back to home', details: 'What we do', process: 'How we work', calculator: 'Calculator', calculatorLead: 'We will build the individual calculator for this service in the next step.', calculatorNote: 'This area will contain dimensions, material or other inputs needed for price calculation.', work: 'Completed work', workLead: 'These photos show real projects completed by Napertskala.', other: 'Services', call: 'Call us', whatsapp: 'Message on WhatsApp', cta: 'Tell us about your job', ctaText: 'Send photos, dimensions or a short description and we will contact you to discuss the work.', location: 'Gori • Other locations by agreement', hours: 'Every day • 10:00–23:00' },
 };
 const defaultMapUrl = 'https://maps.app.goo.gl/7jSzVvmDWJkMUuYNA';
 const servicePhoneKeys: Record<ServiceSlug, string> = {
@@ -224,6 +244,7 @@ const servicePhoneKeys: Record<ServiceSlug, string> = {
   electrical: 'phone_electrical',
   'laser-cutting': 'phone_laser_cutting',
   excavator: 'phone_excavator',
+  towing: 'phone_towing',
   diagnostics: 'phone_diagnostics',
 };
 const defaultServicePhones: Record<ServiceSlug, string> = {
@@ -231,6 +252,7 @@ const defaultServicePhones: Record<ServiceSlug, string> = {
   electrical: '568 88 41 35',
   'laser-cutting': '568 88 41 35',
   excavator: '',
+  towing: '',
   diagnostics: '568 88 41 35',
 };
 const toWhatsappNumber = (phone: string) => {
@@ -354,6 +376,16 @@ const calculatorPresets: Record<ServiceSlug, CalculatorPreset> = {
     ka: { title: 'ექსკავატორის მომსახურების კალკულატორი', lead: 'შეიყვანეთ სამუშაო საათები, გასვლა და დამატებითი დატვირთვა/გაწმენდა.', note: 'ფასი დამოკიდებულია მისასვლელზე, მიწის ტიპზე და სამუშაოს მოცულობაზე.', formula: '80₾ დაწყება + 120₾/სთ + 2₾/კმ + 70₾ დამატებითი საათი' },
     en: { title: 'Excavator service calculator', lead: 'Enter machine hours, travel and extra loading/cleanup time.', note: 'Price depends on access, soil type and job volume.', formula: '80 GEL start + 120 GEL/hour + 2 GEL/km + 70 GEL extra hour' },
     calculate: (v) => 80 + v.hours * 120 + v.distance * 2 + v.loading * 70,
+  },
+  towing: {
+    base: 50,
+    fields: [
+      { key: 'distance', ka: 'გადაყვანის მანძილი', en: 'Transport distance', unitKa: 'კმ', unitEn: 'km', min: 0, max: 500, step: 1, defaultValue: 10 },
+      { key: 'loading', ka: 'რთული ჩატვირთვა', en: 'Difficult loading', unitKa: 'სთ', unitEn: 'h', min: 0, max: 10, step: 1, defaultValue: 0 },
+    ],
+    ka: { title: 'ევაკუატორის ფასის კალკულატორი', lead: 'შეიყვანეთ გადაყვანის მანძილი და რთული ჩატვირთვის დრო.', note: 'ეს არის სავარაუდო ფასი; საბოლოო ღირებულება დამოკიდებულია ავტომობილის მდგომარეობასა და მისადგომზე.', formula: '50₾ გასვლა + 3₾/კმ + 40₾ რთული ჩატვირთვის საათზე' },
+    en: { title: 'Towing price calculator', lead: 'Enter transport distance and difficult-loading time.', note: 'This is an estimate; final price depends on vehicle condition and access.', formula: '50 GEL dispatch + 3 GEL/km + 40 GEL per difficult-loading hour' },
+    calculate: (v) => 50 + v.distance * 3 + v.loading * 40,
   },
   diagnostics: {
     base: 40,

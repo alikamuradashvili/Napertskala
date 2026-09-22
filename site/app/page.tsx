@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, Building2, Car, CheckCircle2, Clock3, Gift, Hammer, Languages, MapPin, Menu, MessageCircle, Phone, ShieldCheck, Wrench, X, Zap } from 'lucide-react';
+import { ArrowRight, Building2, Car, CheckCircle2, Clock3, Gift, Hammer, Languages, MapPin, Menu, MessageCircle, Phone, ShieldCheck, Truck, Wrench, X, Zap } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import AccountLink from '@/components/account-link';
@@ -18,7 +18,7 @@ const content = {
     weldingText: 'ვმუშაობთ როგორც კერძო შეკვეთებზე, ისე სამშენებლო კომპანიებისა და საწარმოებისთვის. ვამზადებთ და ვაკეთებთ მონტაჟს ზუსტი მოთხოვნების მიხედვით.',
     weldingItems: ['ლითონის კონსტრუქციები', 'კიბეები, მოაჯირები და ჭიშკრები', 'მილები და სამრეწველო სამუშაოები', 'შეკეთება და ადგილზე შედუღება', 'სამშენებლო კომპანიების შეკვეთები', 'საწარმოების დამზადება და მონტაჟი'],
     servicesTitle: 'ყველა სერვისი ერთ სივრცეში', servicesLead: 'პრაქტიკული გადაწყვეტა სახლისთვის, ბიზნესისთვის და ავტომობილისთვის.',
-    services: [['შედუღება', 'ყველა ტიპის შედუღება, კონსტრუქციების დამზადება, შეკეთება და მონტაჟი.', 'Welding'], ['ელექტრო მომსახურება', 'სახლის ელექტრობა, სამფაზიანი სისტემები, დიდი ქარხნების ელექტრო სამუშაოები და ელექტროძრავების მომსახურება.', 'Electrical'], ['ლაზერული ჭრა და გრავირება', 'ხის სუვენირები, საჩუქრები, დეკორატიული პანოები და პერსონალური გრავირება თქვენი დიზაინით.', 'Laser gifts'], ['ექსკავატორით მომსახურება', 'მიწის სამუშაოები, თხრილები, მოსწორება, დატვირთვა და ობიექტის მომზადება შეთანხმებით.', 'Excavator'], ['ავტო დიაგნოსტიკა', 'ავტომობილის საბაზისო კომპიუტერული და ელექტრო დიაგნოსტიკა.', 'Diagnostics']],
+    services: [['შედუღება', 'ყველა ტიპის შედუღება, კონსტრუქციების დამზადება, შეკეთება და მონტაჟი.', 'Welding'], ['ელექტრო მომსახურება', 'სახლის ელექტრობა, სამფაზიანი სისტეები, დიდი ქარხნების ელექტრო სამუშაოები და ელექტროძრავების მომსახურება.', 'Electrical'], ['ლაზერული ჭრა და გრავირება', 'ხის სუვენირები, საჩუქრები, დეკორატიული პანოები და პერსონალური გრავირება თქვენი დიზაინით.', 'Laser gifts'], ['ექსკავატორით მომსახურება', 'მიწის სამუშაოები, თხრილები, მოსწორება, დატვირთვა და ობიექტის მომზადება შეთანხმებით.', 'Excavator'], ['ევაკუატორით მომსახურება', 'ავტომობილის გადაყვანა გორში და სხვა ლოკაციებზე წინასწარი შეთანხმებით.', 'Towing'], ['ავტო დიაგნოსტიკა', 'ავტომობილის საბაზისო კომპიუტერული და ელექტრო დიაგნოსტიკა.', 'Diagnostics']],
     whyTitle: 'რატომ ნაპერწკალა?',
     why: [['ერთი გუნდი, ბევრი შესაძლებლობა', 'რთული ამოცანებისთვის რამდენიმე სპეციალისტის ძებნა აღარ დაგჭირდებათ.'], ['მობილური მომსახურება', 'ძირითადად გორში ვართ, თუმცა შეთანხმებით სხვა ლოკაციაზეც მოვალთ.'], ['კომპანიებთან თანამშრომლობა', 'ვიღებთ მასშტაბურ შეკვეთებს სამშენებლო კომპანიებისა და საწარმოებისთვის.'], ['ორენოვანი კომუნიკაცია', 'გესაუბრებით ქართულად და ინგლისურად.']],
     ctaTitle: 'გაქვთ სამუშაო? დავიწყოთ საუბარი.', ctaText: 'გამოგვიგზავნეთ ფოტო ან მოკლე აღწერა WhatsApp-ზე და მიიღეთ სწრაფი პასუხი.',
@@ -34,7 +34,7 @@ const content = {
     weldingText: 'We handle private jobs as well as projects for construction companies and factories, with fabrication and installation tailored to your requirements.',
     weldingItems: ['Metal structures', 'Stairs, railings and gates', 'Pipe and industrial welding', 'Repairs and mobile welding', 'Construction company projects', 'Factory fabrication and installation'],
     servicesTitle: 'Every service in one place', servicesLead: 'Practical technical solutions for your home, business and vehicle.',
-    services: [['Welding', 'All welding types, custom metal fabrication, repair and installation.', 'Welding'], ['Electrical services', 'Home wiring, three-phase systems, electrical work for large factories and electric-motor service.', 'Electrical'], ['Laser cutting & engraving', 'Wooden souvenirs, gifts, decorative panels and personalized engraving made from your design.', 'Laser gifts'], ['Excavator service', 'Earthworks, trenches, leveling, loading and site preparation by agreement.', 'Excavator'], ['Car diagnostics', 'Basic computer and electrical diagnostics for passenger vehicles.', 'Diagnostics']],
+    services: [['Welding', 'All welding types, custom metal fabrication, repair and installation.', 'Welding'], ['Electrical services', 'Home wiring, three-phase systems, electrical work for large factories and electric-motor service.', 'Electrical'], ['Laser cutting & engraving', 'Wooden souvenirs, gifts, decorative panels and personalized engraving made from your design.', 'Laser gifts'], ['Excavator service', 'Earthworks, trenches, leveling, loading and site preparation by agreement.', 'Excavator'], ['Towing service', 'Vehicle transport in Gori and other locations by prior agreement.', 'Towing'], ['Car diagnostics', 'Basic computer and electrical diagnostics for passenger vehicles.', 'Diagnostics']],
     whyTitle: 'Why Napertskala?',
     why: [['One team, many capabilities', 'No need to coordinate several specialists for a complex technical job.'], ['Mobile service', 'Based in Gori, with travel to other locations available by agreement.'], ['Built for business', 'We take on larger projects for construction companies and factories.'], ['Bilingual communication', 'We can assist you in Georgian and English.']],
     ctaTitle: 'Have a job in mind? Let’s talk.', ctaText: 'Send a photo or a short description on WhatsApp and get a quick response.',
@@ -67,6 +67,7 @@ const laserSlides = [
 ];
 const electricalSlides = ['/services/electrical/electrical-panel-service.png'];
 const excavatorSlides = ['/services/excavator/excavator-earthwork-service.png'];
+const towingSlides = ['/services/towing/mercedes-sprinter-tow-truck-service.png'];
 const diagnosticsSlides = ['/services/diagnostics/car-diagnostics-service.png'];
 
 export default function Home() {
@@ -77,7 +78,7 @@ export default function Home() {
   const [cms, setCms] = useState<{content:Record<string,{ka:string;en:string}>;settings:Record<string,string>;gallery:Array<{url:string}>} | null>(null);
   useEffect(() => { fetch('/api/site').then((r) => r.ok ? r.json() : null).then((value:unknown) => value && setCms(value as {content:Record<string,{ka:string;en:string}>;settings:Record<string,string>;gallery:Array<{url:string}>})).catch(() => {}); }, []);
   const rotatingWeldingPhotos = [...weldingSlides, ...(cms?.gallery ?? []).map((item)=>item.url)];
-  const servicePhotoGroups: Record<string, string[]> = { welding: rotatingWeldingPhotos, electrical: electricalSlides, 'laser-cutting': laserSlides, excavator: excavatorSlides, diagnostics: diagnosticsSlides };
+  const servicePhotoGroups: Record<string, string[]> = { welding: rotatingWeldingPhotos, electrical: electricalSlides, 'laser-cutting': laserSlides, excavator: excavatorSlides, towing: towingSlides, diagnostics: diagnosticsSlides };
   useEffect(() => { const timer=window.setInterval(()=>setServicePhotoIndex((current)=>(current+1)%rotatingWeldingPhotos.length),3200); return()=>window.clearInterval(timer); }, [rotatingWeldingPhotos.length]);
   const pick = (key:string, fallback:string) => cms?.content?.[key]?.[lang] || fallback;
   const t = { ...content[lang], titleA: pick('hero_title_a', content[lang].titleA), titleB: pick('hero_title_b', content[lang].titleB), lead: pick('hero_lead', content[lang].lead), weldingTitle: pick('welding_title', content[lang].weldingTitle), weldingText: pick('welding_text', content[lang].weldingText), servicesTitle: pick('services_title', content[lang].servicesTitle), ctaTitle: pick('cta_title', content[lang].ctaTitle), ctaText: pick('cta_text', content[lang].ctaText), hours: cms?.settings?.hours || content[lang].hours, location: cms?.settings?.location || content[lang].location };
@@ -85,8 +86,8 @@ export default function Home() {
   const mapUrl = cms?.settings?.map_url || defaultMapUrl;
   const logoSrc = cms?.settings?.logo_media_id ? `/api/media/${cms.settings.logo_media_id}` : '/logo.jpg';
   const heroSrc = cms?.settings?.hero_media_id ? `/api/media/${cms.settings.hero_media_id}` : logoSrc;
-  const icons = [Wrench, Zap, Gift, Hammer, Car];
-  const serviceSlugs = ['welding', 'electrical', 'laser-cutting', 'excavator', 'diagnostics'];
+  const icons = [Wrench, Zap, Gift, Hammer, Truck, Car];
+  const serviceSlugs = ['welding', 'electrical', 'laser-cutting', 'excavator', 'towing', 'diagnostics'];
   const serviceEnabled = (slug: string) => cms?.settings?.[`service_${slug.replace('-', '_')}_enabled`] !== 'false';
   const navTargets = ['home', 'services', 'about', 'contact'];
   const go = (id: string) => { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); setMenuOpen(false); };

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ServiceDetail from './service-detail';
 
-const serviceSlugs = ['welding', 'electrical', 'laser-cutting', 'excavator', 'diagnostics'] as const;
+const serviceSlugs = ['welding', 'electrical', 'laser-cutting', 'excavator', 'towing', 'diagnostics'] as const;
 type ServiceSlug = (typeof serviceSlugs)[number];
 
 const metadataBySlug: Record<ServiceSlug, { title: string; description: string }> = {
@@ -25,6 +25,10 @@ const metadataBySlug: Record<ServiceSlug, { title: string; description: string }
   excavator: {
     title: 'ექსკავატორით მომსახურება | Napertskala',
     description: 'მიწის სამუშაოები, თხრილები, მოსწორება, დატვირთვა და ობიექტის მომზადება გორში და შეთანხმებით სხვა ლოკაციებზე.',
+  },
+  towing: {
+    title: 'ევაკუატორით მომსახურება | Napertskala',
+    description: 'ავტომობილის უსაფრთხო გადაყვანა გორში და სხვა ლოკაციებზე წინასწარი შეთანხმებით.',
   },
 };
 
