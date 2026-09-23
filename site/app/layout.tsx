@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://napertskala.ge'),
   title: 'ნაპერწკალა | Napertskala — შედუღება და ტექნიკური მომსახურება',
   description: 'ყველა ტიპის შედუღება, ელექტრო მომსახურება, სამრეწველო დანადგარები და ავტო დიაგნოსტიკა გორში და საქართველოს მასშტაბით.',
+  verification: { google: 'CmIemAXUbvSbTYnRIzZV8BlzPXjS0EVgT4LetLk5a3I' },
   alternates: { canonical: '/' },
   icons: {
     icon: [{ url: '/favicon.png', type: 'image/png' }],
