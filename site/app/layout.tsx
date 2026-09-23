@@ -4,6 +4,11 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'ნაპერწკალა | Napertskala — შედუღება და ტექნიკური მომსახურება',
   description: 'ყველა ტიპის შედუღება, ელექტრო მომსახურება, სამრეწველო დანადგარები და ავტო დიაგნოსტიკა გორში და საქართველოს მასშტაბით.',
+  icons: {
+    icon: [{ url: '/favicon.png', type: 'image/png' }],
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
   openGraph: { title: 'ნაპერწკალა | Napertskala', description: 'პროფესიონალური შედუღება და ტექნიკური მომსახურება — გორი და მთელი საქართველო.', type: 'website' },
 };
 
