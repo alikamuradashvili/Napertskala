@@ -48,6 +48,7 @@ const login = await import(moduleUrl('app/api/auth/login/route.ts'));
 const logout = await import(moduleUrl('app/api/auth/logout/route.ts'));
 const admin = await import(moduleUrl('app/api/admin/route.ts'));
 const media = await import(moduleUrl('app/api/admin/media/route.ts'));
+const publicSite = await import(moduleUrl('app/api/site/route.ts'));
 const google = await import(moduleUrl('app/api/auth/google/callback/route.ts'));
 const googleStart = await import(moduleUrl('app/api/auth/google/start/route.ts'));
 const { default: adminLayout } = await import(moduleUrl('app/admin/layout.tsx'));
@@ -121,6 +122,22 @@ test('password login creates a session and active admins can access the panel an
   }
 });
 
+test('administrators assign photos to separate public service galleries', async () => {
+  const user = await addUser('admin');
+  const cookie = await cookieFor(user);
+  sqlite.prepare("INSERT INTO media(id,object_key,filename,content_type,size,created_at) VALUES('weld-photo','weld-object','weld.jpg','image/jpeg',10,1)").run();
+  sqlite.prepare("INSERT INTO media(id,object_key,filename,content_type,size,created_at) VALUES('electric-photo','electric-object','electric.jpg','image/jpeg',10,2)").run();
+  for (const [mediaId, gallery] of [['weld-photo','welding'],['electric-photo','electrical']]) {
+    const response = await admin.PATCH(request('/api/admin','PATCH',{action:'assign_gallery',mediaId,gallery},cookie));
+    assert.equal(response.status,200,await response.clone().text());
+  }
+  assert.equal((await admin.PATCH(request('/api/admin','PATCH',{action:'assign_gallery',mediaId:'electric-photo',gallery:'unknown'},cookie))).status,400);
+  const payload = await (await publicSite.GET()).json();
+  assert.equal(payload.galleries.welding[0].id,'weld-photo');
+  assert.equal(payload.galleries.electrical[0].id,'electric-photo');
+  assert.deepEqual(payload.gallery,payload.galleries.welding,'The legacy welding gallery stays compatible with the homepage');
+});
+
 test('disabled and non-admin accounts cannot log in or reuse a session for admin access', async () => {
   for (const [role, status] of [['admin', 'disabled'], ['customer', 'active']]) {
     const user = await addUser(role, status, `${role}@example.test`);
@@ -174,7 +191,8 @@ test('configured Google sign-in redirects to Google with state and only identity
   assert.equal(target.searchParams.get('scope'),'openid email profile');
   assert.equal(target.searchParams.get('response_type'),'code');
   assert.equal(target.searchParams.has('client_secret'),false);
-  assert.match(first.headers.get('set-cookie'),/HttpOnly; Secure; SameSite=Lax/);
+  assert.match(first.headers.get('set-cookie'),/HttpOnly; SameSite=Lax/);
+  assert.equal(first.headers.get('set-cookie').includes('; Secure'),false,'Local HTTP OAuth state cookies must remain usable on localhost');
   assert.ok(first.headers.get('set-cookie').includes(target.searchParams.get('state')));
   assert.notEqual(target.searchParams.get('state'),new URL(second.headers.get('location')).searchParams.get('state'));
 });

@@ -42,6 +42,7 @@ if /i "%COMMAND%"=="install" goto install
 if /i "%COMMAND%"=="build" goto build
 if /i "%COMMAND%"=="check" goto check
 if /i "%COMMAND%"=="restart" goto restart
+if /i "%COMMAND%"=="public" goto public
 if /i "%COMMAND%"=="stop" goto stop
 if /i "%COMMAND%"=="dev" goto dev
 
@@ -53,6 +54,7 @@ echo   start-site.cmd install
 echo   start-site.cmd build
 echo   start-site.cmd check
 echo   start-site.cmd restart
+echo   start-site.cmd public
 echo   start-site.cmd stop
 exit /b 1
 
@@ -91,6 +93,27 @@ echo Open http://localhost:3000 in your browser.
 echo Press Ctrl+C to stop the server.
 echo.
 call pnpm.cmd run dev
+exit /b %errorlevel%
+
+:public
+call :find_running_server
+if defined SERVER_PID (
+  echo Stopping the existing Napertskala server with PID %SERVER_PID%...
+  taskkill /PID %SERVER_PID% /F >nul 2>nul
+  timeout /t 2 /nobreak >nul
+  if exist ".vinext\dev\lock.json" del /q ".vinext\dev\lock.json"
+)
+if not defined SERVER_PID if exist ".vinext\dev\lock.json" del /q ".vinext\dev\lock.json"
+if not exist "node_modules" (
+  echo Dependencies are missing. Installing them first...
+  call pnpm.cmd install
+  if errorlevel 1 exit /b %errorlevel%
+)
+echo Starting Napertskala for local and Cloudflare Tunnel access...
+echo Local URL: http://localhost:3000
+echo Keep this Command Prompt window open. Press Ctrl+C to stop.
+echo.
+call pnpm.cmd exec vinext dev --hostname 0.0.0.0 --port 3000
 exit /b %errorlevel%
 
 :restart

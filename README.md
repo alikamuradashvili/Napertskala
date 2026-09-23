@@ -53,10 +53,63 @@ start-site.cmd install    REM Install dependencies
 start-site.cmd build      REM Create production build
 start-site.cmd check      REM Check TypeScript
 start-site.cmd restart    REM Stop the current server and start a fresh one
+start-site.cmd public     REM Listen on the home network for direct domain access
 start-site.cmd stop       REM Stop the running server
 ```
 
 If `start-site.cmd` finds that Napertskala is already running, it now prints the existing URL and exits successfully. This is normal—only one development server should run for the same project.
+
+## დომენის პირდაპირ ამ კომპიუტერზე მიბმა (Cloudflare-ის გარეშე)
+
+`localhost` DNS-ში ვერ ჩაიწერება: ის ყოველთვის მხოლოდ იმავე მოწყობილობას ნიშნავს. `napertskala.ge` უნდა მიუთითებდეს თქვენი სახლის ინტერნეტის **საჯარო IPv4** მისამართზე, ხოლო როუტერმა მოთხოვნა ამ კომპიუტერზე უნდა გადმოაგზავნოს.
+
+### 1. საიტის საჯარო რეჟიმში გაშვება
+
+Command Prompt-ში გაუშვით:
+
+```cmd
+cd /d C:\Users\alika\Desktop\Napertskala\Napertskala
+start-public-site.cmd
+```
+
+ეს რეჟიმი საიტს `0.0.0.0:3000`-ზე ასმენინებს. CMD-ის ფანჯარა ღია უნდა დარჩეს. საიტი და დომენი იმუშავებს მხოლოდ მაშინ, როცა კომპიუტერი, პროგრამა, როუტერი და ინტერნეტი ჩართულია.
+
+### 2. კომპიუტერის შიდა IP მისამართი
+
+CMD-ში გაუშვით `ipconfig` და იპოვეთ აქტიური Wi-Fi/Ethernet-ის **IPv4 Address**, მაგალითად `192.168.1.50`. როუტერში ამ კომპიუტერს გაუკეთეთ DHCP Reservation/Static Lease, რომ ეს მისამართი არ შეიცვალოს.
+
+### 3. როუტერის Port Forwarding
+
+როუტერის მართვის გვერდზე შექმენით ერთი წესი:
+
+- Protocol: `TCP`
+- External/WAN port: `80`
+- Internal/LAN IP: ამ კომპიუტერის IPv4, მაგალითად `192.168.1.50`
+- Internal port: `3000`
+- Status: `Enabled`
+
+Windows Firewall-შიც საჭიროა შემომავალი TCP `3000` პორტის დაშვება. ეს არის Windows-ის სისტემური ცვლილება და ცალკე უნდა გაკეთდეს მხოლოდ თქვენი თანხმობით.
+
+### 4. Domenebi.ge DNS ჩანაწერები
+
+დომენის DNS მართვაში ჩაწერეთ:
+
+| Type | Host/Name | Value | TTL |
+| --- | --- | --- | --- |
+| `A` | `@` | თქვენი საჯარო IPv4 | `300` ან Auto |
+| `A` | `www` | იგივე საჯარო IPv4 | `300` ან Auto |
+
+`www`-სთვის მეორე `A` ჩანაწერის ნაცვლად შეიძლება `CNAME` გამოიყენოთ: `www` → `napertskala.ge`. წაშალეთ მხოლოდ ის parking/redirect ჩანაწერი, რომელიც ამავე `@` ან `www` სახელზე ეწინააღმდეგება ახალ ჩანაწერს.
+
+### 5. საჯარო IPv4 / CGNAT შემოწმება
+
+შეადარეთ როუტერის Internet/WAN IPv4 თქვენს საჯარო IP-ს. თუ როუტერის WAN მისამართი იწყება `10.*`, `100.64.*`–`100.127.*`, `172.16.*`–`172.31.*` ან `192.168.*`, სავარაუდოდ პროვაიდერის CGNAT-ზე ხართ. ასეთ შემთხვევაში პირდაპირი შემოსული კავშირი ვერ იმუშავებს და პროვაიდერს უნდა სთხოვოთ **public IPv4** (სასურველია static IPv4).
+
+ტესტი ჩაატარეთ ტელეფონის მობილური ინტერნეტით და არა იმავე Wi-Fi-დან: გახსენით `http://napertskala.ge`. ზოგიერთ როუტერს საკუთარი საჯარო მისამართის იმავე Wi-Fi-დან გახსნა არ შეუძლია (NAT loopback).
+
+### უსაფრთხოების მნიშვნელოვანი შეზღუდვა
+
+ეს პირდაპირი ვარიანტი არის ჩვეულებრივი `HTTP`, არა `HTTPS`. ადმინისტრატორის პაროლი და სესია ინტერნეტში დაშიფვრის გარეშე გადაიცემა, ამიტომ საჯარო HTTP მისამართიდან Admin Panel-ში შესვლა არ არის უსაფრთხო. ასევე Google OAuth ჩვეულებრივ დომენზე დაუშიფრავ `http://napertskala.ge/...` callback-ს არ იღებს — Google-ით შესვლა იმუშავებს მხოლოდ `localhost`-ზე, სანამ დომენზე HTTPS არ დაემატება. ელფოსტა/პაროლით შესვლა ტექნიკურად იმუშავებს, მაგრამ საჯარო HTTP-ზე მის გამოყენებას არ გირჩევთ.
 
 ## Admin Panel
 
@@ -176,6 +229,34 @@ The production output is created in `site/dist`.
 ## Live site
 
 Private deployed version: https://napertskala-services.smuradash1.chatgpt.site
+
+### Run the public domain from this computer
+
+Cloudflare Tunnel connects both `https://napertskala.ge` and
+`https://www.napertskala.ge` to the website running on this computer. In CMD:
+
+```cmd
+cd /d C:\Users\alika\Desktop\Napertskala\Napertskala
+start-online-site.cmd
+```
+
+Keep the website and Cloudflare Tunnel windows open while the public site is in
+use. Closing the computer, disconnecting its internet, or closing either process
+makes the public site unavailable.
+
+The launcher starts two watchdog windows. If the website or Tunnel process exits
+unexpectedly, its watchdog waits five seconds and starts it again. The Tunnel
+uses HTTP/2 over TCP because it is more reliable than QUIC on this connection,
+and it starts only after the local website returns a successful response. This
+prevents the temporary Cloudflare 502 error that occurred while the site was
+still starting.
+
+The domain's Google OAuth client must include these values:
+
+```text
+Authorized JavaScript origin: https://napertskala.ge
+Authorized redirect URI: https://napertskala.ge/api/auth/google/callback
+```
 
 ## Troubleshooting
 

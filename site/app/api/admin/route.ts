@@ -1,13 +1,14 @@
 import { audit, getDb, json, publicUser, requireAdmin, verifyOrigin } from '@/lib/server';
 import { manageUsers } from '@/lib/user-management';
+import { isServiceSlug } from '@/lib/services';
 
 export async function GET(request: Request) {
   const auth = await requireAdmin(request); if ('error' in auth) return auth.error; const db = await getDb();
   const content = await db.prepare('SELECT key,value_ka,value_en,updated_at FROM site_content ORDER BY key').all();
   const settings = await db.prepare('SELECT key,value,updated_at FROM settings ORDER BY key').all();
   const media = await db.prepare(`SELECT m.id,m.filename,m.content_type,m.size,m.alt_ka,m.alt_en,m.created_at,
-    CASE WHEN g.media_id IS NULL THEN 0 ELSE 1 END AS in_gallery,g.sort_order AS gallery_order
-    FROM media m LEFT JOIN gallery_items g ON g.media_id=m.id AND g.gallery='welding'
+    CASE WHEN g.media_id IS NULL THEN 0 ELSE 1 END AS in_gallery,g.gallery,g.sort_order AS gallery_order
+    FROM media m LEFT JOIN gallery_items g ON g.media_id=m.id
     ORDER BY CASE WHEN g.sort_order IS NULL THEN 1 ELSE 0 END,g.sort_order,m.created_at DESC`).all();
   return json({ user:publicUser(auth.user), content:content.results??[], settings:settings.results??[], media:(media.results??[]).map((m:any)=>({...m,url:`/api/media/${m.id}`})) });
 }
@@ -26,6 +27,8 @@ export async function PATCH(request: Request) {
     await audit(auth.user.id,'save_settings','site'); return json({ok:true});
   }
   if (action === 'update_gallery') {
+    const gallery = String(body.gallery??'welding');
+    if (!isServiceSlug(gallery)) return json({error:'Choose a valid service gallery.'},400);
     const ids = Array.isArray(body.ids) ? body.ids.map((value:any)=>String(value)).filter(Boolean).slice(0,100) : [];
     if (new Set(ids).size !== ids.length) return json({error:'Gallery contains duplicate images.'},400);
     if (ids.length) {
@@ -33,9 +36,19 @@ export async function PATCH(request: Request) {
       const found=await db.prepare(`SELECT id FROM media WHERE id IN (${placeholders})`).bind(...ids).all<{id:string}>();
       if ((found.results??[]).length !== ids.length) return json({error:'One or more gallery images could not be found.'},400);
     }
-    await db.prepare("DELETE FROM gallery_items WHERE gallery='welding'").run();
-    if (ids.length) await db.batch(ids.map((id:string,index:number)=>db.prepare("INSERT INTO gallery_items(media_id,gallery,sort_order,created_at) VALUES(?,'welding',?,?)").bind(id,index,Date.now())));
-    await audit(auth.user.id,'update_gallery','gallery','welding',{count:ids.length}); return json({ok:true});
+    await db.prepare('DELETE FROM gallery_items WHERE gallery=?').bind(gallery).run();
+    if (ids.length) await db.batch(ids.map((id:string,index:number)=>db.prepare('INSERT INTO gallery_items(media_id,gallery,sort_order,created_at) VALUES(?,?,?,?)').bind(id,gallery,index,Date.now())));
+    await audit(auth.user.id,'update_gallery','gallery',gallery,{count:ids.length}); return json({ok:true});
+  }
+  if (action === 'assign_gallery') {
+    const mediaId=String(body.mediaId??'');const gallery=body.gallery==null||body.gallery===''?null:String(body.gallery);
+    if(!mediaId)return json({error:'Choose an image.'},400);
+    if(gallery!==null&&!isServiceSlug(gallery))return json({error:'Choose a valid service gallery.'},400);
+    const found=await db.prepare('SELECT id FROM media WHERE id=?').bind(mediaId).first<{id:string}>();
+    if(!found)return json({error:'Image not found.'},404);
+    if(gallery===null){await db.prepare('DELETE FROM gallery_items WHERE media_id=?').bind(mediaId).run();}
+    else{const last=await db.prepare('SELECT COALESCE(MAX(sort_order),-1) AS position FROM gallery_items WHERE gallery=?').bind(gallery).first<{position:number}>();await db.batch([db.prepare('DELETE FROM gallery_items WHERE media_id=?').bind(mediaId),db.prepare('INSERT INTO gallery_items(media_id,gallery,sort_order,created_at) VALUES(?,?,?,?)').bind(mediaId,gallery,Number(last?.position??-1)+1,Date.now())]);}
+    await audit(auth.user.id,'assign_gallery','media',mediaId,{gallery});return json({ok:true});
   }
   if (['create_user','update_user','delete_user'].includes(action)) return manageUsers(request, body);
   return json({error:'Unknown action'},400);

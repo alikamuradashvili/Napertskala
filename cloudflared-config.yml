@@ -1,0 +1,14 @@
+tunnel: da68dd55-ad98-439c-95bf-1b9d5be9a995
+credentials-file: C:\Users\alika\.cloudflared\da68dd55-ad98-439c-95bf-1b9d5be9a995.json
+protocol: http2
+edge-ip-version: "4"
+retries: 100
+grace-period: 30s
+loglevel: warn
+
+ingress:
+  - hostname: napertskala.ge
+    service: http://localhost:3000
+  - hostname: www.napertskala.ge
+    service: http://localhost:3000
+  - service: http_status:404
