@@ -46,5 +46,21 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     hasMap: 'https://maps.app.goo.gl/7jSzVvmDWJkMUuYNA',
   };
 
-  return <html lang="ka"><body><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessData) }} />{children}</body></html>;
+  return <html lang="ka">
+    <head>
+      <title>ნაპერწკალა | Napertskala — შედუღება და ტექნიკური მომსახურება</title>
+      <meta name="description" content="ყველა ტიპის შედუღება, ელექტრო მომსახურება, ლაზერული ჭრა, ევაკუატორი და ავტო დიაგნოსტიკა გორში და საქართველოს მასშტაბით." />
+      <meta name="google-site-verification" content="CmIemAXUbvSbTYnRIzZV8BlzPXjS0EVgT4LetLk5a3I" />
+      <link rel="canonical" href="https://napertskala.ge/" />
+      <link rel="icon" href="/favicon.png" type="image/png" />
+      <link rel="apple-touch-icon" href="/favicon.png" />
+      <meta property="og:title" content="ნაპერწკალა | Napertskala" />
+      <meta property="og:description" content="პროფესიონალური შედუღება და ტექნიკური მომსახურება — გორი და მთელი საქართველო." />
+      <meta property="og:url" content="https://napertskala.ge/" />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="https://napertskala.ge/logo.jpg" />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(businessData) }} />
+    </head>
+    <body>{children}</body>
+  </html>;
 }
