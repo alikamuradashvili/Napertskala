@@ -39,7 +39,20 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   if (!serviceSlugs.includes(slug as ServiceSlug)) return {};
-  return metadataBySlug[slug as ServiceSlug];
+  const metadata = metadataBySlug[slug as ServiceSlug];
+  const path = `/services/${slug}`;
+  return {
+    ...metadata,
+    alternates: { canonical: path },
+    openGraph: {
+      ...metadata,
+      url: path,
+      siteName: 'ნაპერწკალა | Napertskala',
+      locale: 'ka_GE',
+      type: 'website',
+      images: [{ url: '/logo.jpg', width: 1254, height: 1254, alt: 'ნაპერწკალა — Napertskala' }],
+    },
+  };
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
