@@ -43,7 +43,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     },
     areaServed: { '@type': 'Country', name: 'Georgia' },
     sameAs: ['https://www.facebook.com/profile.php?id=61589481147761'],
-    hasMap: 'https://maps.app.goo.gl/7jSzVvmDWJkMUuYNA',
+    hasMap: 'https://www.google.com/maps/place/%E1%83%9C%E1%83%90%E1%83%9E%E1%83%94%E1%83%A0%E1%83%AC%E1%83%99%E1%83%90%E1%83%9A%E1%83%90/@42.0474674,44.1001749,15.75z/data=!4m6!3m5!1s0x4044993500e2b44b:0x94ca73743c8ad05a!8m2!3d42.0486285!4d44.0977862!16s%2Fg%2F11zysksb52',
   };
 
   return <html lang="ka">
