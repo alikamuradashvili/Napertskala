@@ -38,6 +38,8 @@ export const builtInServicePhotos: Record<ServiceSlug, BuiltInServicePhoto[]> = 
     { src: '/services/welding/canopy-frame-painted.jpg', ka: 'მომზადებული და შეღებილი კონსტრუქცია', en: 'Prepared and painted structure', tall: false },
   ],
   'laser-cutting': [
+    { src: '/services/laser-cutting/personalized-georgian-skewer-sets-display-1.jpeg', ka: 'პერსონალური გრავირებით დამზადებული შამფურების კომპლექტები', en: 'Skewer sets with personalized Georgian engraving', tall: true },
+    { src: '/services/laser-cutting/personalized-georgian-skewer-sets-display-2.jpeg', ka: 'ქართული თემატიკის გრავირებული შამფურების კოლექცია', en: 'Collection of Georgian-themed engraved skewer sets', tall: true },
     { src: '/services/laser-cutting/engraved-skewer-set-grill-wide.jpeg', ka: 'ლაზერით გრავირებული შამფურების კომპლექტი მაყალთან', en: 'Laser engraved skewer set with grill', tall: false },
     { src: '/services/laser-cutting/engraved-skewer-set-grill-close.jpeg', ka: 'ქართული ორნამენტით გრავირებული შამფურები', en: 'Skewers engraved with Georgian ornament', tall: false },
     { src: '/services/laser-cutting/engraved-skewer-set-finished.jpeg', ka: 'გრავირებული შამფურის კომპლექტი', en: 'Engraved skewer set', tall: true },
