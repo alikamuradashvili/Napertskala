@@ -247,9 +247,11 @@ makes the public site unavailable.
 The launcher starts two watchdog windows. If the website or Tunnel process exits
 unexpectedly, its watchdog waits five seconds and starts it again. The Tunnel
 uses HTTP/2 over TCP because it is more reliable than QUIC on this connection,
-and it starts only after the local website returns a successful response. This
-prevents the temporary Cloudflare 502 error that occurred while the site was
-still starting.
+and uses Cloudflare's `1.1.1.1:53` and `1.0.0.1:53` resolvers instead of relying
+on an unresponsive local DNS resolver. It starts only after the local website
+returns a successful response. This prevents temporary Cloudflare 502 errors
+while the site is still starting and DNS timeout errors while discovering the
+Tunnel edge.
 
 The domain's Google OAuth client must include these values:
 
