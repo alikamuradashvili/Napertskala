@@ -2,7 +2,8 @@
 setlocal
 title Napertskala Online Launcher
 
-set "CLOUDFLARED=C:\Program Files (x86)\cloudflared\cloudflared.exe"
+set "CLOUDFLARED=%~dp0tools\cloudflared.exe"
+if not exist "%CLOUDFLARED%" set "CLOUDFLARED=C:\Program Files (x86)\cloudflared\cloudflared.exe"
 set "TUNNEL_CONFIG=%~dp0cloudflared-config.yml"
 
 if not exist "%CLOUDFLARED%" (

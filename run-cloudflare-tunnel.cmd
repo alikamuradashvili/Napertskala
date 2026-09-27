@@ -2,7 +2,8 @@
 setlocal
 title Napertskala Cloudflare Tunnel Watchdog
 
-set "CLOUDFLARED=C:\Program Files (x86)\cloudflared\cloudflared.exe"
+set "CLOUDFLARED=%~dp0tools\cloudflared.exe"
+if not exist "%CLOUDFLARED%" set "CLOUDFLARED=C:\Program Files (x86)\cloudflared\cloudflared.exe"
 set "TUNNEL_CONFIG=%~dp0cloudflared-config.yml"
 set "DNS_RESOLVER_PRIMARY=1.1.1.1:53"
 set "DNS_RESOLVER_SECONDARY=1.0.0.1:53"

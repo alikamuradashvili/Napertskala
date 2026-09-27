@@ -253,6 +253,10 @@ returns a successful response. This prevents temporary Cloudflare 502 errors
 while the site is still starting and DNS timeout errors while discovering the
 Tunnel edge.
 
+The launchers prefer the verified portable executable at
+`tools\cloudflared.exe` and fall back to the system installation when that file
+is not present. The portable executable is intentionally excluded from Git.
+
 The domain's Google OAuth client must include these values:
 
 ```text
