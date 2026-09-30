@@ -20,12 +20,18 @@ if not exist "%TUNNEL_CONFIG%" (
 )
 
 echo Checking the local website...
-powershell.exe -NoProfile -Command "try { $r=Invoke-WebRequest -UseBasicParsing -Uri 'http://localhost:3000' -TimeoutSec 3; if ($r.StatusCode -eq 200) { exit 0 } } catch {}; exit 1" >nul 2>nul
-if errorlevel 1 (
+powershell.exe -NoProfile -Command "try { $response=Invoke-WebRequest -UseBasicParsing -Uri 'http://localhost:3000' -TimeoutSec 3; if ($response.StatusCode -eq 200 -and $response.Content -match '/@vite/client') { exit 2 }; if ($response.StatusCode -eq 200) { exit 0 } } catch {}; exit 1" >nul 2>nul
+set "SITE_CHECK=%errorlevel%"
+if "%SITE_CHECK%"=="2" (
+  echo Development server detected. Replacing it with the production server...
+  call "%~dp0start-site.cmd" stop
+  set "SITE_CHECK=1"
+)
+if not "%SITE_CHECK%"=="0" (
   echo Starting the website watchdog...
   start "Napertskala Website Watchdog" cmd.exe /k ""%~dp0run-site-server.cmd""
 ) else (
-  echo Website is already running.
+  echo Production website is already running.
 )
 
 echo Waiting for http://localhost:3000 ...
@@ -40,11 +46,11 @@ goto wait_for_site
 
 :site_ready
 echo Website is ready. Starting the tunnel watchdog...
-"%CLOUDFLARED%" tunnel info napertskala 2>nul | findstr /C:"CONNECTOR ID" >nul
+powershell.exe -NoProfile -Command "$process=Get-CimInstance Win32_Process -ErrorAction SilentlyContinue | Where-Object { $_.Name -eq 'cloudflared.exe' -and $_.CommandLine -match 'napertskala' }; if ($process) { exit 0 }; exit 1" >nul 2>nul
 if errorlevel 1 (
   start "Napertskala Tunnel Watchdog" cmd.exe /k ""%~dp0run-cloudflare-tunnel.cmd""
 ) else (
-  echo Cloudflare Tunnel is already connected.
+  echo Cloudflare Tunnel process is already running.
 )
 
 echo Waiting for the public tunnel connection...
