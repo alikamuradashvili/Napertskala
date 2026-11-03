@@ -1,2 +1,4 @@
 .idea/
 .site-git-history-backup/
+.wrangler/
+tools/cloudflared.exe
